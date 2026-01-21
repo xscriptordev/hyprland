@@ -380,6 +380,7 @@ install_dotfiles() {
     mkdir -p "$CONFIG_DIR/hypr/wallpapers"
     if [ -d "$SCRIPT_DIR/wallpapers" ] && [ "$(ls -A "$SCRIPT_DIR/wallpapers" 2>/dev/null)" ]; then
         cp -r "$SCRIPT_DIR/wallpapers/"* "$CONFIG_DIR/hypr/wallpapers/"
+        log "Copied $(ls -1 "$SCRIPT_DIR/wallpapers" | wc -l) wallpapers"
     fi
     
     # Copy Waybar config
@@ -394,12 +395,17 @@ install_dotfiles() {
     mkdir -p "$CONFIG_DIR/dunst"
     cp -r "$SCRIPT_DIR/config/dunst/"* "$CONFIG_DIR/dunst/"
     
-    # Copy Hyprlock config
-    mkdir -p "$CONFIG_DIR/hypr"
-    cp "$SCRIPT_DIR/config/hyprlock/hyprlock.conf" "$CONFIG_DIR/hypr/"
+    # Copy Hyprlock config (goes to ~/.config/hypr/)
+    if [ -f "$SCRIPT_DIR/config/hyprlock/hyprlock.conf" ]; then
+        cp "$SCRIPT_DIR/config/hyprlock/hyprlock.conf" "$CONFIG_DIR/hypr/"
+        log "Installed hyprlock.conf"
+    fi
     
-    # Copy Hypridle config
-    cp "$SCRIPT_DIR/config/hypridle/hypridle.conf" "$CONFIG_DIR/hypr/"
+    # Copy Hypridle config (goes to ~/.config/hypr/)
+    if [ -f "$SCRIPT_DIR/config/hypridle/hypridle.conf" ]; then
+        cp "$SCRIPT_DIR/config/hypridle/hypridle.conf" "$CONFIG_DIR/hypr/"
+        log "Installed hypridle.conf"
+    fi
     
     log "Dotfiles installed successfully!"
 }
