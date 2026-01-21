@@ -7,7 +7,6 @@ CONFIG_DIR="$HOME/.config/hypr"
 THEMES_DIR="$CONFIG_DIR/themes"
 CURRENT_THEME="$CONFIG_DIR/theme.conf"
 WAYBAR_CSS="$HOME/.config/waybar/style.css"
-WAYBAR_TEMPLATE="$CONFIG_DIR/waybar-template.css"
 
 # Fallback to script directory themes
 SCRIPT_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
@@ -20,18 +19,31 @@ get_themes() {
     ls -1 "$THEMES_DIR"/*.conf 2>/dev/null | xargs -n1 basename | sed 's/.conf$//'
 }
 
-# Extract color from theme file
+# Extract color from theme file (removes # prefix if present)
 get_color() {
     local theme_file="$1"
     local color_name="$2"
-    grep "^\$$color_name" "$theme_file" | sed 's/.*= *//' | tr -d ' '
+    grep "^\$$color_name" "$theme_file" | sed 's/.*= *//' | tr -d ' ' | sed 's/#//'
 }
 
-# Generate Waybar CSS from template
+# Convert hex to RGB values
+hex_to_rgb() {
+    local hex="$1"
+    # Remove # if present
+    hex="${hex#\#}"
+    # Extract RGB
+    local r=$((16#${hex:0:2}))
+    local g=$((16#${hex:2:2}))
+    local b=$((16#${hex:4:2}))
+    echo "$r, $g, $b"
+}
+
+# Generate Waybar CSS from theme
 generate_waybar_css() {
     local theme_file="$1"
+    local theme_name=$(basename "$theme_file" .conf)
     
-    # Extract colors from theme
+    # Extract colors from theme (as hex without #)
     local color0=$(get_color "$theme_file" "color0")
     local color1=$(get_color "$theme_file" "color1")
     local color2=$(get_color "$theme_file" "color2")
@@ -42,12 +54,17 @@ generate_waybar_css() {
     local color7=$(get_color "$theme_file" "color7")
     local color8=$(get_color "$theme_file" "color8")
     
-    # Generate CSS with theme colors
+    # Convert to RGB for rgba()
+    local rgb0=$(hex_to_rgb "$color0")
+    local rgb1=$(hex_to_rgb "$color1")
+    local rgb2=$(hex_to_rgb "$color2")
+    local rgb5=$(hex_to_rgb "$color5")
+    local rgb6=$(hex_to_rgb "$color6")
+    local rgb8=$(hex_to_rgb "$color8")
+    
+    # Generate CSS
     cat > "$WAYBAR_CSS" << EOF
-/* ============================================================================
-   WAYBAR STYLES - Island Design (Auto-generated from theme)
-   Theme: $(basename "$theme_file" .conf)
-   ============================================================================ */
+/* Waybar Styles - Theme: ${theme_name} (Auto-generated) */
 
 * {
     font-family: "JetBrainsMono Nerd Font", "Noto Sans", monospace;
@@ -60,7 +77,7 @@ generate_waybar_css() {
 
 window#waybar {
     background: transparent;
-    color: ${color7};
+    color: #${color7};
 }
 
 window#waybar > box {
@@ -68,22 +85,20 @@ window#waybar > box {
     padding: 0;
 }
 
-/* Logo Island */
 #custom-logo {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color1}99;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb1}, 0.6);
     border-radius: 12px;
     padding: 4px 14px;
     margin: 4px 4px 4px 0;
-    color: ${color1};
+    color: #${color1};
     font-size: 14px;
     font-weight: bold;
 }
 
-/* Workspaces Island */
 #workspaces {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color5}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb5}, 0.4);
     border-radius: 12px;
     margin: 4px;
     padding: 0 4px;
@@ -92,179 +107,167 @@ window#waybar > box {
 #workspaces button {
     padding: 4px 10px;
     margin: 4px 2px;
-    color: ${color8};
+    color: #${color8};
     background: transparent;
     border: none;
     border-radius: 8px;
-    transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
-    background: ${color8}80;
-    color: ${color7};
+    background: rgba(${rgb8}, 0.5);
+    color: #${color7};
 }
 
 #workspaces button.active {
-    background: linear-gradient(135deg, ${color1}, ${color5});
-    color: ${color7};
+    background: linear-gradient(135deg, #${color1}, #${color5});
+    color: #${color7};
     font-weight: bold;
 }
 
 #workspaces button.urgent {
-    background: ${color4};
-    color: ${color7};
+    background: #${color4};
+    color: #${color7};
 }
 
-/* Clock Island */
 #clock {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color1}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb1}, 0.4);
     border-radius: 12px;
     padding: 4px 18px;
     margin: 4px;
-    color: ${color7};
+    color: #${color7};
     font-weight: 600;
 }
 
 #clock:hover {
-    background: linear-gradient(135deg, ${color1}cc, ${color5}cc);
-    border-color: ${color1};
+    background: linear-gradient(135deg, rgba(${rgb1}, 0.8), rgba(${rgb5}, 0.8));
+    border-color: #${color1};
 }
 
-/* Tray Island */
 #tray {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color8}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb8}, 0.4);
     border-radius: 12px;
     padding: 4px 10px;
     margin: 4px;
 }
 
-/* CPU Island */
 #cpu {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color6}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb6}, 0.4);
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: ${color6};
+    color: #${color6};
 }
 
 #cpu:hover {
-    background: ${color6}33;
-    border-color: ${color6};
+    background: rgba(${rgb6}, 0.2);
+    border-color: #${color6};
 }
 
-/* Memory Island */
 #memory {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color5}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb5}, 0.4);
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: ${color5};
+    color: #${color5};
 }
 
 #memory:hover {
-    background: ${color5}33;
-    border-color: ${color5};
+    background: rgba(${rgb5}, 0.2);
+    border-color: #${color5};
 }
 
-/* Pulseaudio Island */
 #pulseaudio {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color2}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb2}, 0.4);
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: ${color2};
+    color: #${color2};
 }
 
 #pulseaudio:hover {
-    background: ${color2}33;
-    border-color: ${color2};
+    background: rgba(${rgb2}, 0.2);
+    border-color: #${color2};
 }
 
 #pulseaudio.muted {
-    color: ${color1};
-    border-color: ${color1}66;
+    color: #${color1};
+    border-color: rgba(${rgb1}, 0.4);
 }
 
-/* Network Island */
 #network {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color6}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb6}, 0.4);
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: ${color6};
+    color: #${color6};
 }
 
 #network:hover {
-    background: ${color6}33;
-    border-color: ${color6};
+    background: rgba(${rgb6}, 0.2);
+    border-color: #${color6};
 }
 
 #network.disconnected {
-    color: ${color1};
-    border-color: ${color1}66;
+    color: #${color1};
+    border-color: rgba(${rgb1}, 0.4);
 }
 
-/* Battery Island */
 #battery {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color2}66;
+    background: rgba(${rgb0}, 0.92);
+    border: 2px solid rgba(${rgb2}, 0.4);
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: ${color2};
+    color: #${color2};
 }
 
 #battery:hover {
-    background: ${color2}33;
-    border-color: ${color2};
+    background: rgba(${rgb2}, 0.2);
+    border-color: #${color2};
 }
 
 #battery.charging {
-    color: ${color3};
-    border-color: ${color3}66;
+    color: #${color3};
 }
 
 #battery.warning:not(.charging) {
-    color: ${color4};
-    border-color: ${color4}66;
+    color: #${color4};
 }
 
 #battery.critical:not(.charging) {
-    color: ${color1};
-    border-color: ${color1};
-    background: ${color1}33;
+    color: #${color1};
+    border-color: #${color1};
+    background: rgba(${rgb1}, 0.2);
 }
 
-/* Power Button Island */
 #custom-power {
-    background: linear-gradient(135deg, ${color1}, ${color5});
+    background: linear-gradient(135deg, #${color1}, #${color5});
     border: none;
     border-radius: 12px;
     padding: 4px 14px;
     margin: 4px 0 4px 4px;
-    color: ${color7};
+    color: #${color7};
     font-size: 14px;
 }
 
 #custom-power:hover {
-    background: ${color1};
+    background: #${color1};
 }
 
-/* Tooltip */
 tooltip {
-    background: rgba(${color0//\#/}, 0.95);
-    border: 2px solid ${color1};
+    background: rgba(${rgb0}, 0.95);
+    border: 2px solid #${color1};
     border-radius: 10px;
 }
 
 tooltip label {
-    color: ${color7};
+    color: #${color7};
     padding: 6px;
 }
 EOF
@@ -304,6 +307,7 @@ main() {
     
     # Restart Waybar
     killall waybar 2>/dev/null
+    sleep 0.3
     waybar &
     
     # Notify user
