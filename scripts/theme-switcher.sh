@@ -19,23 +19,29 @@ get_themes() {
     ls -1 "$THEMES_DIR"/*.conf 2>/dev/null | xargs -n1 basename | sed 's/.conf$//'
 }
 
-# Extract color from theme file (removes # prefix if present)
-get_color() {
+# Extract color from theme file and return clean hex
+get_color_hex() {
     local theme_file="$1"
     local color_name="$2"
-    grep "^\$$color_name" "$theme_file" | sed 's/.*= *//' | tr -d ' ' | sed 's/#//'
+    local color=$(grep "^\$$color_name" "$theme_file" | sed 's/.*= *//' | tr -d ' ')
+    # Ensure it starts with #
+    if [[ ! "$color" =~ ^# ]]; then
+        color="#$color"
+    fi
+    # Remove any trailing characters after 7 chars (#RRGGBB)
+    echo "${color:0:7}"
 }
 
-# Convert hex to RGB values
-hex_to_rgb() {
+# Convert hex color to rgba string
+hex_to_rgba() {
     local hex="$1"
+    local alpha="$2"
     # Remove # if present
     hex="${hex#\#}"
-    # Extract RGB
     local r=$((16#${hex:0:2}))
     local g=$((16#${hex:2:2}))
     local b=$((16#${hex:4:2}))
-    echo "$r, $g, $b"
+    echo "rgba($r, $g, $b, $alpha)"
 }
 
 # Generate Waybar CSS from theme
@@ -43,28 +49,35 @@ generate_waybar_css() {
     local theme_file="$1"
     local theme_name=$(basename "$theme_file" .conf)
     
-    # Extract colors from theme (as hex without #)
-    local color0=$(get_color "$theme_file" "color0")
-    local color1=$(get_color "$theme_file" "color1")
-    local color2=$(get_color "$theme_file" "color2")
-    local color3=$(get_color "$theme_file" "color3")
-    local color4=$(get_color "$theme_file" "color4")
-    local color5=$(get_color "$theme_file" "color5")
-    local color6=$(get_color "$theme_file" "color6")
-    local color7=$(get_color "$theme_file" "color7")
-    local color8=$(get_color "$theme_file" "color8")
+    # Extract colors as hex
+    local c0=$(get_color_hex "$theme_file" "color0")
+    local c1=$(get_color_hex "$theme_file" "color1")
+    local c2=$(get_color_hex "$theme_file" "color2")
+    local c3=$(get_color_hex "$theme_file" "color3")
+    local c4=$(get_color_hex "$theme_file" "color4")
+    local c5=$(get_color_hex "$theme_file" "color5")
+    local c6=$(get_color_hex "$theme_file" "color6")
+    local c7=$(get_color_hex "$theme_file" "color7")
+    local c8=$(get_color_hex "$theme_file" "color8")
     
-    # Convert to RGB for rgba()
-    local rgb0=$(hex_to_rgb "$color0")
-    local rgb1=$(hex_to_rgb "$color1")
-    local rgb2=$(hex_to_rgb "$color2")
-    local rgb5=$(hex_to_rgb "$color5")
-    local rgb6=$(hex_to_rgb "$color6")
-    local rgb8=$(hex_to_rgb "$color8")
+    # Pre-compute rgba values
+    local bg_main=$(hex_to_rgba "$c0" "0.92")
+    local border_accent=$(hex_to_rgba "$c1" "0.6")
+    local border_secondary=$(hex_to_rgba "$c5" "0.4")
+    local border_dim=$(hex_to_rgba "$c8" "0.4")
+    local border_cyan=$(hex_to_rgba "$c6" "0.4")
+    local border_green=$(hex_to_rgba "$c2" "0.4")
+    local hover_accent=$(hex_to_rgba "$c1" "0.8")
+    local hover_secondary=$(hex_to_rgba "$c5" "0.8")
+    local hover_cyan=$(hex_to_rgba "$c6" "0.2")
+    local hover_purple=$(hex_to_rgba "$c5" "0.2")
+    local hover_green=$(hex_to_rgba "$c2" "0.2")
+    local hover_dim=$(hex_to_rgba "$c8" "0.5")
+    local critical_bg=$(hex_to_rgba "$c1" "0.2")
+    local tooltip_bg=$(hex_to_rgba "$c0" "0.95")
     
-    # Generate CSS
-    cat > "$WAYBAR_CSS" << EOF
-/* Waybar Styles - Theme: ${theme_name} (Auto-generated) */
+    cat > "$WAYBAR_CSS" << CSSEOF
+/* Waybar Styles - Theme: ${theme_name} */
 
 * {
     font-family: "JetBrainsMono Nerd Font", "Noto Sans", monospace;
@@ -77,7 +90,7 @@ generate_waybar_css() {
 
 window#waybar {
     background: transparent;
-    color: #${color7};
+    color: ${c7};
 }
 
 window#waybar > box {
@@ -86,19 +99,19 @@ window#waybar > box {
 }
 
 #custom-logo {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb1}, 0.6);
+    background: ${bg_main};
+    border: 2px solid ${border_accent};
     border-radius: 12px;
     padding: 4px 14px;
     margin: 4px 4px 4px 0;
-    color: #${color1};
+    color: ${c1};
     font-size: 14px;
     font-weight: bold;
 }
 
 #workspaces {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb5}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_secondary};
     border-radius: 12px;
     margin: 4px;
     padding: 0 4px;
@@ -107,170 +120,170 @@ window#waybar > box {
 #workspaces button {
     padding: 4px 10px;
     margin: 4px 2px;
-    color: #${color8};
+    color: ${c8};
     background: transparent;
     border: none;
     border-radius: 8px;
 }
 
 #workspaces button:hover {
-    background: rgba(${rgb8}, 0.5);
-    color: #${color7};
+    background: ${hover_dim};
+    color: ${c7};
 }
 
 #workspaces button.active {
-    background: linear-gradient(135deg, #${color1}, #${color5});
-    color: #${color7};
+    background: ${c1};
+    color: ${c7};
     font-weight: bold;
 }
 
 #workspaces button.urgent {
-    background: #${color4};
-    color: #${color7};
+    background: ${c4};
+    color: ${c7};
 }
 
 #clock {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb1}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_accent};
     border-radius: 12px;
     padding: 4px 18px;
     margin: 4px;
-    color: #${color7};
+    color: ${c7};
     font-weight: 600;
 }
 
 #clock:hover {
-    background: linear-gradient(135deg, rgba(${rgb1}, 0.8), rgba(${rgb5}, 0.8));
-    border-color: #${color1};
+    background: ${hover_accent};
+    border-color: ${c1};
 }
 
 #tray {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb8}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_dim};
     border-radius: 12px;
     padding: 4px 10px;
     margin: 4px;
 }
 
 #cpu {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb6}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_cyan};
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: #${color6};
+    color: ${c6};
 }
 
 #cpu:hover {
-    background: rgba(${rgb6}, 0.2);
-    border-color: #${color6};
+    background: ${hover_cyan};
+    border-color: ${c6};
 }
 
 #memory {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb5}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_secondary};
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: #${color5};
+    color: ${c5};
 }
 
 #memory:hover {
-    background: rgba(${rgb5}, 0.2);
-    border-color: #${color5};
+    background: ${hover_purple};
+    border-color: ${c5};
 }
 
 #pulseaudio {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb2}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_green};
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: #${color2};
+    color: ${c2};
 }
 
 #pulseaudio:hover {
-    background: rgba(${rgb2}, 0.2);
-    border-color: #${color2};
+    background: ${hover_green};
+    border-color: ${c2};
 }
 
 #pulseaudio.muted {
-    color: #${color1};
-    border-color: rgba(${rgb1}, 0.4);
+    color: ${c1};
+    border-color: ${border_accent};
 }
 
 #network {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb6}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_cyan};
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: #${color6};
+    color: ${c6};
 }
 
 #network:hover {
-    background: rgba(${rgb6}, 0.2);
-    border-color: #${color6};
+    background: ${hover_cyan};
+    border-color: ${c6};
 }
 
 #network.disconnected {
-    color: #${color1};
-    border-color: rgba(${rgb1}, 0.4);
+    color: ${c1};
+    border-color: ${border_accent};
 }
 
 #battery {
-    background: rgba(${rgb0}, 0.92);
-    border: 2px solid rgba(${rgb2}, 0.4);
+    background: ${bg_main};
+    border: 2px solid ${border_green};
     border-radius: 12px;
     padding: 4px 12px;
     margin: 4px;
-    color: #${color2};
+    color: ${c2};
 }
 
 #battery:hover {
-    background: rgba(${rgb2}, 0.2);
-    border-color: #${color2};
+    background: ${hover_green};
+    border-color: ${c2};
 }
 
 #battery.charging {
-    color: #${color3};
+    color: ${c3};
 }
 
 #battery.warning:not(.charging) {
-    color: #${color4};
+    color: ${c4};
 }
 
 #battery.critical:not(.charging) {
-    color: #${color1};
-    border-color: #${color1};
-    background: rgba(${rgb1}, 0.2);
+    color: ${c1};
+    border-color: ${c1};
+    background: ${critical_bg};
 }
 
 #custom-power {
-    background: linear-gradient(135deg, #${color1}, #${color5});
+    background: ${c1};
     border: none;
     border-radius: 12px;
     padding: 4px 14px;
     margin: 4px 0 4px 4px;
-    color: #${color7};
+    color: ${c7};
     font-size: 14px;
 }
 
 #custom-power:hover {
-    background: #${color1};
+    background: ${c5};
 }
 
 tooltip {
-    background: rgba(${rgb0}, 0.95);
-    border: 2px solid #${color1};
+    background: ${tooltip_bg};
+    border: 2px solid ${c1};
     border-radius: 10px;
 }
 
 tooltip label {
-    color: #${color7};
+    color: ${c7};
     padding: 6px;
 }
-EOF
+CSSEOF
 }
 
 # Main function
@@ -307,13 +320,12 @@ main() {
     
     # Restart Waybar
     killall waybar 2>/dev/null
-    sleep 0.3
+    sleep 0.5
     waybar &
+    disown
     
     # Notify user
-    notify-send "Theme Switcher" "Applied theme: $selected" -i preferences-desktop-theme
-    
-    echo "Theme '$selected' applied successfully!"
+    notify-send "Theme Switcher" "Applied: $selected" -i preferences-desktop-theme
 }
 
 main "$@"
