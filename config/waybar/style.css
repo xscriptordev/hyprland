@@ -1,0 +1,187 @@
+/* ╔════════════════════════════════════════════════════════════════════════╗
+   ║ WAYBAR STYLES - Premium Glassmorphism                                  ║
+   ║ Theme: X                                                               ║
+   ╚════════════════════════════════════════════════════════════════════════╝ */
+
+/* Color Variables - Based on X theme */
+@define-color background rgba(54, 53, 55, 0.85);
+@define-color background-alt rgba(105, 103, 108, 0.7);
+@define-color foreground #f7f1ff;
+@define-color accent #fc618d;
+@define-color accent2 #948ae3;
+@define-color green #7bd88f;
+@define-color yellow #fce566;
+@define-color orange #fd9353;
+@define-color cyan #5ad4e6;
+@define-color red #fc618d;
+
+/* Main Bar */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @foreground;
+}
+
+window#waybar > box {
+    background: @background;
+    border-radius: 16px;
+    border: 2px solid rgba(252, 97, 141, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Workspaces */
+#workspaces {
+    background: transparent;
+    margin: 4px 8px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 4px 12px;
+    margin: 2px 2px;
+    background: transparent;
+    color: @foreground;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+    background: @background-alt;
+    color: @accent;
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, @accent, @accent2);
+    color: @foreground;
+    border-radius: 10px;
+}
+
+#workspaces button.urgent {
+    background: @red;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Window Title */
+#window {
+    padding: 4px 16px;
+    margin: 4px 8px;
+    color: @foreground;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+/* Clock */
+#clock {
+    padding: 4px 16px;
+    margin: 4px 8px;
+    background: @background-alt;
+    color: @foreground;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+#clock:hover {
+    background: linear-gradient(135deg, @accent, @accent2);
+}
+
+/* Generic Module Style */
+#pulseaudio,
+#network,
+#battery,
+#tray {
+    padding: 4px 12px;
+    margin: 4px 4px;
+    background: @background-alt;
+    color: @foreground;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#pulseaudio:hover,
+#network:hover,
+#battery:hover {
+    background: @accent2;
+}
+
+/* Battery States */
+#battery.charging {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    animation: pulse 1s infinite;
+}
+
+/* Network */
+#network.disconnected {
+    color: @red;
+}
+
+#network.wifi {
+    color: @cyan;
+}
+
+/* Pulseaudio */
+#pulseaudio.muted {
+    color: @red;
+    background: rgba(252, 97, 141, 0.2);
+}
+
+/* Tray */
+#tray {
+    background: transparent;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: @red;
+}
+
+/* Power Button */
+#custom-power {
+    padding: 4px 14px;
+    margin: 4px 8px 4px 4px;
+    background: linear-gradient(135deg, @accent, @accent2);
+    color: @foreground;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#custom-power:hover {
+    background: @red;
+    transform: scale(1.05);
+}
+
+/* Tooltip */
+tooltip {
+    background: @background;
+    border: 2px solid @accent;
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: @foreground;
+    padding: 8px;
+}

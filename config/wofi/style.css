@@ -1,0 +1,79 @@
+/* ╔════════════════════════════════════════════════════════════════════════╗
+   ║ WOFI STYLES - Glassmorphism                                            ║
+   ╚════════════════════════════════════════════════════════════════════════╝ */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 14px;
+}
+
+window {
+    margin: 0px;
+    border: 2px solid rgba(252, 97, 141, 0.4);
+    background-color: rgba(54, 53, 55, 0.9);
+    border-radius: 16px;
+}
+
+#input {
+    margin: 12px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 12px;
+    background-color: rgba(105, 103, 108, 0.6);
+    color: #f7f1ff;
+    outline: none;
+}
+
+#input:focus {
+    border: 2px solid #fc618d;
+    background-color: rgba(105, 103, 108, 0.8);
+}
+
+#inner-box {
+    margin: 0px 12px 12px 12px;
+    border: none;
+    border-radius: 12px;
+    background-color: transparent;
+}
+
+#outer-box {
+    margin: 0px;
+    border: none;
+    border-radius: 16px;
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0px;
+    border: none;
+}
+
+#text {
+    margin: 0px 8px;
+    color: #f7f1ff;
+}
+
+#entry {
+    padding: 12px;
+    margin: 4px 0px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+#entry:selected {
+    background: linear-gradient(135deg, rgba(252, 97, 141, 0.6), rgba(148, 138, 227, 0.6));
+    border-radius: 10px;
+}
+
+#entry:hover {
+    background-color: rgba(105, 103, 108, 0.4);
+}
+
+#img {
+    margin-right: 8px;
+}
+
+#text:selected {
+    color: #f7f1ff;
+    font-weight: bold;
+}
