@@ -1,20 +1,6 @@
 /* ============================================================================
-   WAYBAR STYLES - X Theme
-   Premium Glassmorphism Design
+   WAYBAR STYLES - Island Design with Theme Integration
    ============================================================================ */
-
-/* Color Variables - X Theme Colors */
-@define-color bg-primary rgba(54, 53, 55, 0.92);
-@define-color bg-secondary rgba(105, 103, 108, 0.6);
-@define-color fg-primary #f7f1ff;
-@define-color fg-secondary #b0aeb3;
-@define-color accent-pink #fc618d;
-@define-color accent-purple #948ae3;
-@define-color accent-green #7bd88f;
-@define-color accent-yellow #fce566;
-@define-color accent-orange #fd9353;
-@define-color accent-cyan #5ad4e6;
-@define-color border-color rgba(252, 97, 141, 0.4);
 
 /* Base Styles */
 * {
@@ -26,43 +12,46 @@
     margin: 0;
 }
 
+/* Main Bar - Transparent background */
 window#waybar {
     background: transparent;
-    color: @fg-primary;
+    color: #f7f1ff;
 }
 
 window#waybar>box {
-    background: @bg-primary;
-    border-radius: 14px;
-    border: 2px solid @border-color;
-    padding: 2px 8px;
-}
-
-/* Logo */
-#custom-logo {
-    color: @accent-pink;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 0 12px;
-    margin-right: 4px;
-}
-
-/* Separator */
-#custom-separator {
-    color: @fg-secondary;
-    padding: 0 4px;
-}
-
-/* Workspaces */
-#workspaces {
     background: transparent;
-    margin: 4px 6px;
+    padding: 0;
+}
+
+/* ============================================================================
+   LEFT MODULES
+   ============================================================================ */
+
+/* Logo Island */
+#custom-logo {
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(252, 97, 141, 0.6);
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin: 4px 4px 4px 0;
+    color: #fc618d;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Workspaces Island */
+#workspaces {
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(148, 138, 227, 0.4);
+    border-radius: 12px;
+    margin: 4px;
+    padding: 0 4px;
 }
 
 #workspaces button {
     padding: 4px 10px;
-    margin: 0 2px;
-    color: @fg-secondary;
+    margin: 4px 2px;
+    color: #b0aeb3;
     background: transparent;
     border: none;
     border-radius: 8px;
@@ -70,107 +59,52 @@ window#waybar>box {
 }
 
 #workspaces button:hover {
-    background: @bg-secondary;
-    color: @fg-primary;
+    background: rgba(105, 103, 108, 0.5);
+    color: #f7f1ff;
 }
 
 #workspaces button.active {
-    background: linear-gradient(135deg, @accent-pink, @accent-purple);
-    color: @fg-primary;
+    background: linear-gradient(135deg, #fc618d, #948ae3);
+    color: #f7f1ff;
     font-weight: bold;
 }
 
 #workspaces button.urgent {
-    background: @accent-orange;
-    color: @fg-primary;
+    background: #fd9353;
+    color: #f7f1ff;
 }
 
-/* Window Title */
-#window {
-    padding: 0 16px;
-    color: @fg-secondary;
-    font-weight: 400;
-}
+/* ============================================================================
+   CENTER MODULES
+   ============================================================================ */
 
-/* Clock */
+/* Clock Island */
 #clock {
-    padding: 4px 16px;
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(252, 97, 141, 0.4);
+    border-radius: 12px;
+    padding: 4px 18px;
     margin: 4px;
-    background: @bg-secondary;
-    color: @fg-primary;
-    border-radius: 10px;
+    color: #f7f1ff;
     font-weight: 600;
 }
 
 #clock:hover {
-    background: linear-gradient(135deg, @accent-pink, @accent-purple);
+    background: linear-gradient(135deg, rgba(252, 97, 141, 0.8), rgba(148, 138, 227, 0.8));
+    border-color: #fc618d;
 }
 
-/* System Info */
-#cpu,
-#memory {
-    padding: 4px 10px;
-    margin: 4px 2px;
-    color: @fg-primary;
-}
+/* ============================================================================
+   RIGHT MODULES - Each as separate island
+   ============================================================================ */
 
-#cpu {
-    color: @accent-cyan;
-}
-
-#memory {
-    color: @accent-purple;
-}
-
-/* Generic Module Styles */
-#pulseaudio,
-#network,
-#battery {
-    padding: 4px 10px;
-    margin: 4px 2px;
-    background: @bg-secondary;
-    color: @fg-primary;
-    border-radius: 8px;
-}
-
-#pulseaudio:hover,
-#network:hover,
-#battery:hover {
-    background: @accent-purple;
-}
-
-/* Pulseaudio */
-#pulseaudio.muted {
-    color: @accent-pink;
-    background: rgba(252, 97, 141, 0.2);
-}
-
-/* Network */
-#network.disconnected {
-    color: @accent-pink;
-}
-
-#network.wifi {
-    color: @accent-cyan;
-}
-
-/* Battery */
-#battery.charging {
-    color: @accent-green;
-}
-
-#battery.warning:not(.charging) {
-    color: @accent-yellow;
-}
-
-#battery.critical:not(.charging) {
-    color: @accent-pink;
-    background: rgba(252, 97, 141, 0.2);
-}
-
-/* Tray */
+/* Tray Island */
 #tray {
-    padding: 4px 8px;
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(105, 103, 108, 0.4);
+    border-radius: 12px;
+    padding: 4px 10px;
+    margin: 4px;
 }
 
 #tray>.passive {
@@ -181,28 +115,133 @@ window#waybar>box {
     -gtk-icon-effect: highlight;
 }
 
-/* Power Button */
+/* CPU Island */
+#cpu {
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(90, 212, 230, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #5ad4e6;
+}
+
+#cpu:hover {
+    background: rgba(90, 212, 230, 0.2);
+    border-color: #5ad4e6;
+}
+
+/* Memory Island */
+#memory {
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(148, 138, 227, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #948ae3;
+}
+
+#memory:hover {
+    background: rgba(148, 138, 227, 0.2);
+    border-color: #948ae3;
+}
+
+/* Pulseaudio Island */
+#pulseaudio {
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(123, 216, 143, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #7bd88f;
+}
+
+#pulseaudio:hover {
+    background: rgba(123, 216, 143, 0.2);
+    border-color: #7bd88f;
+}
+
+#pulseaudio.muted {
+    color: #fc618d;
+    border-color: rgba(252, 97, 141, 0.4);
+}
+
+/* Network Island */
+#network {
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(90, 212, 230, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #5ad4e6;
+}
+
+#network:hover {
+    background: rgba(90, 212, 230, 0.2);
+    border-color: #5ad4e6;
+}
+
+#network.disconnected {
+    color: #fc618d;
+    border-color: rgba(252, 97, 141, 0.4);
+}
+
+/* Battery Island */
+#battery {
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(123, 216, 143, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #7bd88f;
+}
+
+#battery:hover {
+    background: rgba(123, 216, 143, 0.2);
+    border-color: #7bd88f;
+}
+
+#battery.charging {
+    color: #fce566;
+    border-color: rgba(252, 229, 102, 0.4);
+}
+
+#battery.warning:not(.charging) {
+    color: #fd9353;
+    border-color: rgba(253, 147, 83, 0.4);
+}
+
+#battery.critical:not(.charging) {
+    color: #fc618d;
+    border-color: #fc618d;
+    background: rgba(252, 97, 141, 0.2);
+}
+
+/* Power Button Island */
 #custom-power {
+    background: linear-gradient(135deg, #fc618d, #948ae3);
+    border: none;
+    border-radius: 12px;
     padding: 4px 14px;
-    margin: 4px 4px 4px 8px;
-    background: linear-gradient(135deg, @accent-pink, @accent-purple);
-    color: @fg-primary;
-    border-radius: 8px;
+    margin: 4px 0 4px 4px;
+    color: #f7f1ff;
     font-size: 14px;
 }
 
 #custom-power:hover {
-    background: @accent-pink;
+    background: #fc618d;
 }
 
-/* Tooltip */
+/* ============================================================================
+   TOOLTIP
+   ============================================================================ */
+
 tooltip {
-    background: @bg-primary;
-    border: 2px solid @accent-pink;
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid #fc618d;
     border-radius: 10px;
 }
 
 tooltip label {
-    color: @fg-primary;
+    color: #f7f1ff;
     padding: 6px;
 }
