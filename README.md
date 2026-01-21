@@ -92,40 +92,84 @@ chmod +x install.sh
 
 ## Keybindings
 
-### Essential
+### Applications
 | Shortcut | Action |
 |----------|--------|
 | `SUPER + Return` | Terminal (Kitty) |
+| `SUPER + T` | Terminal (Kitty) |
 | `SUPER + Q` | Close window |
+| `SUPER + SHIFT + Q` | Exit Hyprland |
 | `SUPER + D` | App launcher (Wofi) |
-| `SUPER + E` | File manager |
+| `SUPER + R` | Run command (Wofi) |
+| `SUPER + E` | File manager (Nautilus) |
+| `SUPER + B` | Browser (Firefox) |
+| `SUPER + C` | Code editor (VSCode) |
+
+### Window Management
+| Shortcut | Action |
+|----------|--------|
 | `SUPER + V` | Toggle floating |
+| `SUPER + Space` | Toggle floating |
 | `SUPER + F` | Fullscreen |
+| `SUPER + M` | Maximize |
+| `SUPER + G` | Center window |
+| `SUPER + SHIFT + Space` | Pin window |
+| `SUPER + P` | Pseudo-tile |
+| `SUPER + J` | Toggle split |
+| `ALT + Tab` | Cycle windows |
+
+### Focus and Movement
+| Shortcut | Action |
+|----------|--------|
+| `SUPER + Arrow Keys` | Move focus |
+| `SUPER + H/J/K/L` | Move focus (vim) |
+| `SUPER + SHIFT + Arrows` | Move window |
+| `SUPER + CTRL + Arrows` | Resize window |
 
 ### Workspaces
 | Shortcut | Action |
 |----------|--------|
-| `SUPER + 1-9` | Go to workspace 1-9 |
+| `SUPER + 1-9` | Go to workspace |
 | `SUPER + SHIFT + 1-9` | Move window to workspace |
+| `SUPER + CTRL + 1-5` | Move window silently |
+| `SUPER + Page Up/Down` | Previous/Next workspace |
 | `SUPER + Mouse Scroll` | Change workspace |
+| `SUPER + S` | Scratchpad toggle |
+
+### Screenshots
+| Shortcut | Action |
+|----------|--------|
+| `Print` | Full screenshot |
+| `SUPER + Print` | Area screenshot |
+| `SUPER + SHIFT + S` | Area screenshot |
+| `SUPER + SHIFT + Print` | Window screenshot |
+
+### Power and Lock
+| Shortcut | Action |
+|----------|--------|
+| `SUPER + L` | Lock screen |
+| `SUPER + SHIFT + L` | Logout menu |
+| `SUPER + CTRL + L` | Suspend |
+| `SUPER + CTRL + SHIFT + L` | Shutdown |
 
 ### Utilities
 | Shortcut | Action |
 |----------|--------|
-| `SUPER + T` | Change theme |
-| `SUPER + W` | Change wallpaper |
-| `SUPER + L` | Lock screen |
-| `Print` | Full screenshot |
-| `SUPER + Print` | Area screenshot |
+| `SUPER + ALT + T` | Theme switcher |
+| `SUPER + W` | Wallpaper selector |
+| `SUPER + SHIFT + C` | Color picker |
+| `SUPER + SHIFT + V` | Clipboard history |
+| `SUPER + N` | Show notification |
+| `SUPER + SHIFT + N` | Clear notifications |
+| `SUPER + SHIFT + B` | Reload Waybar |
+| `SUPER + SHIFT + R` | Reload Hyprland |
 
-### Multimedia
+### Volume (without media keys)
 | Shortcut | Action |
 |----------|--------|
-| `XF86AudioRaiseVolume` | Volume up |
-| `XF86AudioLowerVolume` | Volume down |
-| `XF86AudioMute` | Mute |
-| `XF86MonBrightnessUp` | Brightness up |
-| `XF86MonBrightnessDown` | Brightness down |
+| `SUPER + =` | Volume up |
+| `SUPER + -` | Volume down |
+| `SUPER + Backspace` | Mute |
 
 ---
 
@@ -215,6 +259,6 @@ MIT License - Feel free to use, modify and distribute.
 
 <div align="center">
 
-**Made with care by [xscriptordev](https://github.com/xscriptordev)**
+**[X](https://github.com/xscriptordev)**
 
 </div>

@@ -9,7 +9,7 @@
 # ║    ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝             ║
 # ║                                                                                   ║
 # ║                     Premium Configuration Installer                               ║
-# ║                         by xscriptordev                                           ║
+# ║                         by xscriptor                                              ║
 # ║                                                                                   ║
 # ╚═══════════════════════════════════════════════════════════════════════════════════╝
 
@@ -43,7 +43,7 @@ print_banner() {
     echo -e "${MAGENTA}"
     echo "╔═══════════════════════════════════════════════════════════════╗"
     echo "║     HYPRLAND PREMIUM CONFIGURATION INSTALLER                  ║"
-    echo "║                by xscriptordev                                ║"
+    echo "║                by xscriptor                                   ║"
     echo "╚═══════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
 }

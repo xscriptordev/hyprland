@@ -1,187 +1,208 @@
-/* ╔════════════════════════════════════════════════════════════════════════╗
-   ║ WAYBAR STYLES - Premium Glassmorphism                                  ║
-   ║ Theme: X                                                               ║
-   ╚════════════════════════════════════════════════════════════════════════╝ */
+/* ============================================================================
+   WAYBAR STYLES - X Theme
+   Premium Glassmorphism Design
+   ============================================================================ */
 
-/* Color Variables - Based on X theme */
-@define-color background rgba(54, 53, 55, 0.85);
-@define-color background-alt rgba(105, 103, 108, 0.7);
-@define-color foreground #f7f1ff;
-@define-color accent #fc618d;
-@define-color accent2 #948ae3;
-@define-color green #7bd88f;
-@define-color yellow #fce566;
-@define-color orange #fd9353;
-@define-color cyan #5ad4e6;
-@define-color red #fc618d;
+/* Color Variables - X Theme Colors */
+@define-color bg-primary rgba(54, 53, 55, 0.92);
+@define-color bg-secondary rgba(105, 103, 108, 0.6);
+@define-color fg-primary #f7f1ff;
+@define-color fg-secondary #b0aeb3;
+@define-color accent-pink #fc618d;
+@define-color accent-purple #948ae3;
+@define-color accent-green #7bd88f;
+@define-color accent-yellow #fce566;
+@define-color accent-orange #fd9353;
+@define-color accent-cyan #5ad4e6;
+@define-color border-color rgba(252, 97, 141, 0.4);
 
-/* Main Bar */
+/* Base Styles */
 * {
-    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
-    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", monospace;
+    font-size: 13px;
     font-weight: 500;
     min-height: 0;
+    padding: 0;
+    margin: 0;
 }
 
 window#waybar {
     background: transparent;
-    color: @foreground;
+    color: @fg-primary;
 }
 
-window#waybar > box {
-    background: @background;
-    border-radius: 16px;
-    border: 2px solid rgba(252, 97, 141, 0.3);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+window#waybar>box {
+    background: @bg-primary;
+    border-radius: 14px;
+    border: 2px solid @border-color;
+    padding: 2px 8px;
+}
+
+/* Logo */
+#custom-logo {
+    color: @accent-pink;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 12px;
+    margin-right: 4px;
+}
+
+/* Separator */
+#custom-separator {
+    color: @fg-secondary;
+    padding: 0 4px;
 }
 
 /* Workspaces */
 #workspaces {
     background: transparent;
-    margin: 4px 8px;
-    padding: 0 4px;
+    margin: 4px 6px;
 }
 
 #workspaces button {
-    padding: 4px 12px;
-    margin: 2px 2px;
+    padding: 4px 10px;
+    margin: 0 2px;
+    color: @fg-secondary;
     background: transparent;
-    color: @foreground;
     border: none;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
-    background: @background-alt;
-    color: @accent;
+    background: @bg-secondary;
+    color: @fg-primary;
 }
 
 #workspaces button.active {
-    background: linear-gradient(135deg, @accent, @accent2);
-    color: @foreground;
-    border-radius: 10px;
+    background: linear-gradient(135deg, @accent-pink, @accent-purple);
+    color: @fg-primary;
+    font-weight: bold;
 }
 
 #workspaces button.urgent {
-    background: @red;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    background: @accent-orange;
+    color: @fg-primary;
 }
 
 /* Window Title */
 #window {
-    padding: 4px 16px;
-    margin: 4px 8px;
-    color: @foreground;
+    padding: 0 16px;
+    color: @fg-secondary;
     font-weight: 400;
-    opacity: 0.8;
 }
 
 /* Clock */
 #clock {
     padding: 4px 16px;
-    margin: 4px 8px;
-    background: @background-alt;
-    color: @foreground;
-    border-radius: 12px;
+    margin: 4px;
+    background: @bg-secondary;
+    color: @fg-primary;
+    border-radius: 10px;
     font-weight: 600;
 }
 
 #clock:hover {
-    background: linear-gradient(135deg, @accent, @accent2);
+    background: linear-gradient(135deg, @accent-pink, @accent-purple);
 }
 
-/* Generic Module Style */
+/* System Info */
+#cpu,
+#memory {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    color: @fg-primary;
+}
+
+#cpu {
+    color: @accent-cyan;
+}
+
+#memory {
+    color: @accent-purple;
+}
+
+/* Generic Module Styles */
 #pulseaudio,
 #network,
-#battery,
-#tray {
-    padding: 4px 12px;
-    margin: 4px 4px;
-    background: @background-alt;
-    color: @foreground;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+#battery {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background: @bg-secondary;
+    color: @fg-primary;
+    border-radius: 8px;
 }
 
 #pulseaudio:hover,
 #network:hover,
 #battery:hover {
-    background: @accent2;
-}
-
-/* Battery States */
-#battery.charging {
-    color: @green;
-}
-
-#battery.warning:not(.charging) {
-    color: @yellow;
-}
-
-#battery.critical:not(.charging) {
-    color: @red;
-    animation: pulse 1s infinite;
-}
-
-/* Network */
-#network.disconnected {
-    color: @red;
-}
-
-#network.wifi {
-    color: @cyan;
+    background: @accent-purple;
 }
 
 /* Pulseaudio */
 #pulseaudio.muted {
-    color: @red;
+    color: @accent-pink;
+    background: rgba(252, 97, 141, 0.2);
+}
+
+/* Network */
+#network.disconnected {
+    color: @accent-pink;
+}
+
+#network.wifi {
+    color: @accent-cyan;
+}
+
+/* Battery */
+#battery.charging {
+    color: @accent-green;
+}
+
+#battery.warning:not(.charging) {
+    color: @accent-yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @accent-pink;
     background: rgba(252, 97, 141, 0.2);
 }
 
 /* Tray */
 #tray {
-    background: transparent;
+    padding: 4px 8px;
 }
 
-#tray > .passive {
+#tray>.passive {
     -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
     -gtk-icon-effect: highlight;
-    background: @red;
 }
 
 /* Power Button */
 #custom-power {
     padding: 4px 14px;
-    margin: 4px 8px 4px 4px;
-    background: linear-gradient(135deg, @accent, @accent2);
-    color: @foreground;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    margin: 4px 4px 4px 8px;
+    background: linear-gradient(135deg, @accent-pink, @accent-purple);
+    color: @fg-primary;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
 #custom-power:hover {
-    background: @red;
-    transform: scale(1.05);
+    background: @accent-pink;
 }
 
 /* Tooltip */
 tooltip {
-    background: @background;
-    border: 2px solid @accent;
-    border-radius: 12px;
+    background: @bg-primary;
+    border: 2px solid @accent-pink;
+    border-radius: 10px;
 }
 
 tooltip label {
-    color: @foreground;
-    padding: 8px;
+    color: @fg-primary;
+    padding: 6px;
 }
