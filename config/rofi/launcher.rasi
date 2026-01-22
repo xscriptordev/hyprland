@@ -33,6 +33,9 @@ inputbar {
 prompt { enabled: false; }
 textbox-prompt-colon { enabled: false; }
 
+entry { text-color: @foreground; }
+textbox { background-color: transparent; text-color: @foreground; }
+
 listview {
     lines: 10;
     spacing: 8px;
@@ -55,8 +58,10 @@ element selected {
 
 element-icon {
     size: 24px;
+    border-radius: 10px;
 }
 
 element-text {
     background-color: transparent;
+    text-color: @foreground;
 }
