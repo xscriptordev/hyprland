@@ -17,7 +17,7 @@ window {
 }
 
 mainbox {
-    padding: 18px;
+    padding: 18px 18px 6px 18px;
     background-color: transparent;
 }
 
@@ -32,7 +32,7 @@ inputbar {
 
 prompt { enabled: false; }
 textbox-prompt-colon { enabled: false; }
-entry { text-color: @foreground; }
+entry { background-color: #000000; text-color: @foreground; }
 textbox { background-color: transparent; text-color: @foreground; }
 
 listview {

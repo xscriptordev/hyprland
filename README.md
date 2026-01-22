@@ -99,11 +99,12 @@ chmod +x install.sh
 | `SUPER + T` | Terminal (Kitty) |
 | `SUPER + Q` | Close window |
 | `SUPER + SHIFT + Q` | Exit Hyprland |
-| `SUPER + D` | App launcher (Wofi) |
-| `SUPER + R` | Run command (Wofi) |
+| `SUPER + D` | App launcher (Rofi, fallback to Wofi) |
+| `SUPER + R` | Run command (Rofi, fallback to Wofi) |
 | `SUPER + E` | File manager (Nautilus) |
 | `SUPER + B` | Browser (Firefox) |
 | `SUPER + C` | Code editor (VSCode) |
+| `SUPER + .` | Emoji picker |
 
 ### Window Management
 | Shortcut | Action |
@@ -148,15 +149,29 @@ chmod +x install.sh
 | Shortcut | Action |
 |----------|--------|
 | `SUPER + L` | Lock screen |
-| `SUPER + SHIFT + L` | Logout menu |
+| `SUPER + Escape` | Power menu (logout/reboot/shutdown/etc.) |
+| `SUPER + SHIFT + L` | Power menu (wlogout) |
 | `SUPER + CTRL + L` | Suspend |
 | `SUPER + CTRL + SHIFT + L` | Shutdown |
+
+### Brightness
+| Shortcut | Action |
+|----------|--------|
+| `XF86MonBrightnessUp` | Brightness up |
+| `XF86MonBrightnessDown` | Brightness down |
+| `SUPER + F3` | Brightness up (fallback shortcut) |
+| `SUPER + F2` | Brightness down (fallback shortcut) |
+
+**Notes**
+- Laptop/internal display: uses `brightnessctl`.
+- External monitors: supports DDC/CI via `ddcutil` (may require enabling DDC/CI in the monitor OSD and I2C permissions).
 
 ### Utilities
 | Shortcut | Action |
 |----------|--------|
 | `SUPER + ALT + T` | Theme switcher |
 | `SUPER + W` | Wallpaper selector |
+| `SUPER + Z` | Scale menu (75%/80%/100%) |
 | `SUPER + SHIFT + C` | Color picker |
 | `SUPER + SHIFT + V` | Clipboard history |
 | `SUPER + N` | Show notification |
@@ -190,6 +205,8 @@ chmod +x install.sh
 │   └── wallpapers/      # Wallpapers
 ├── waybar/              # Status bar
 ├── wofi/                # App launcher
+├── rofi/                # App launcher themes
+├── wlogout/             # Logout menu (layout/style/icons)
 └── dunst/               # Notifications
 ```
 
@@ -200,7 +217,7 @@ chmod +x install.sh
 ### Change Theme
 ```bash
 ~/.config/hypr/scripts/theme-switcher.sh
-# Or use: SUPER + T
+# Or use: SUPER + ALT + T
 ```
 
 ### Change Wallpaper
