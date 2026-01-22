@@ -1,0 +1,186 @@
+/* Theme: Praha - Dracula Inspired */
+#custom-logo {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(255, 85, 85, 0.6);
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin: 4px 4px 4px 0;
+    color: #FF5555;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#workspaces {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(189, 147, 249, 0.4);
+    border-radius: 12px;
+    margin: 4px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    color: #6272A4;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+}
+
+#workspaces button:hover {
+    background: rgba(98, 114, 164, 0.5);
+    color: #FFFFFF;
+}
+
+#workspaces button.active {
+    background: #BD93F9;
+    color: #1A1A1A;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    background: #FF5555;
+    color: #FFFFFF;
+}
+
+#clock {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(189, 147, 249, 0.4);
+    border-radius: 12px;
+    padding: 4px 18px;
+    margin: 4px;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+#clock:hover {
+    background: rgba(189, 147, 249, 0.8);
+    border-color: #BD93F9;
+}
+
+#tray {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(98, 114, 164, 0.4);
+    border-radius: 12px;
+    padding: 4px 10px;
+    margin: 4px;
+}
+
+#cpu {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(139, 233, 253, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #8BE9FD;
+}
+
+#cpu:hover {
+    background: rgba(139, 233, 253, 0.2);
+    border-color: #8BE9FD;
+}
+
+#memory {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(189, 147, 249, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #BD93F9;
+}
+
+#memory:hover {
+    background: rgba(189, 147, 249, 0.2);
+    border-color: #BD93F9;
+}
+
+#pulseaudio {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(184, 230, 160, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #B8E6A0;
+}
+
+#pulseaudio:hover {
+    background: rgba(184, 230, 160, 0.2);
+    border-color: #B8E6A0;
+}
+
+#pulseaudio.muted {
+    color: #FF5555;
+    border-color: rgba(255, 85, 85, 0.4);
+}
+
+#network {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(139, 233, 253, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #8BE9FD;
+}
+
+#network:hover {
+    background: rgba(139, 233, 253, 0.2);
+    border-color: #8BE9FD;
+}
+
+#network.disconnected {
+    color: #FF5555;
+    border-color: rgba(255, 85, 85, 0.4);
+}
+
+#battery {
+    background: rgba(26, 26, 26, 0.92);
+    border: 2px solid rgba(184, 230, 160, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #B8E6A0;
+}
+
+#battery:hover {
+    background: rgba(184, 230, 160, 0.2);
+    border-color: #B8E6A0;
+}
+
+#battery.charging {
+    color: #FFE4A3;
+}
+
+#battery.warning:not(.charging) {
+    color: #FFE4A3;
+}
+
+#battery.critical:not(.charging) {
+    color: #FF5555;
+    border-color: #FF5555;
+    background: rgba(255, 85, 85, 0.2);
+}
+
+#custom-power {
+    background: #FF5555;
+    border: none;
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin: 4px 0 4px 4px;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+#custom-power:hover {
+    background: #BD93F9;
+}
+
+tooltip {
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid #BD93F9;
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: #FFFFFF;
+    padding: 6px;
+}

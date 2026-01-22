@@ -1,0 +1,186 @@
+/* Theme: Madrid - Spanish Red */
+#custom-logo {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(204, 0, 51, 0.6);
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin: 4px 4px 4px 0;
+    color: #cc0033;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#workspaces {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(102, 51, 204, 0.4);
+    border-radius: 12px;
+    margin: 4px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    color: #666666;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+}
+
+#workspaces button:hover {
+    background: rgba(102, 102, 102, 0.5);
+    color: #1a1a1a;
+}
+
+#workspaces button.active {
+    background: #cc0033;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    background: #0099cc;
+    color: #ffffff;
+}
+
+#clock {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(204, 0, 51, 0.4);
+    border-radius: 12px;
+    padding: 4px 18px;
+    margin: 4px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#clock:hover {
+    background: rgba(204, 0, 51, 0.8);
+    border-color: #cc0033;
+}
+
+#tray {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(102, 102, 102, 0.4);
+    border-radius: 12px;
+    padding: 4px 10px;
+    margin: 4px;
+}
+
+#cpu {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(0, 153, 204, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #0099cc;
+}
+
+#cpu:hover {
+    background: rgba(0, 153, 204, 0.2);
+    border-color: #0099cc;
+}
+
+#memory {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(102, 51, 204, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #6633cc;
+}
+
+#memory:hover {
+    background: rgba(102, 51, 204, 0.2);
+    border-color: #6633cc;
+}
+
+#pulseaudio {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(0, 153, 51, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #009933;
+}
+
+#pulseaudio:hover {
+    background: rgba(0, 153, 51, 0.2);
+    border-color: #009933;
+}
+
+#pulseaudio.muted {
+    color: #cc0033;
+    border-color: rgba(204, 0, 51, 0.4);
+}
+
+#network {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(0, 153, 204, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #0099cc;
+}
+
+#network:hover {
+    background: rgba(0, 153, 204, 0.2);
+    border-color: #0099cc;
+}
+
+#network.disconnected {
+    color: #cc0033;
+    border-color: rgba(204, 0, 51, 0.4);
+}
+
+#battery {
+    background: rgba(51, 51, 51, 0.92);
+    border: 2px solid rgba(0, 153, 51, 0.4);
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #009933;
+}
+
+#battery:hover {
+    background: rgba(0, 153, 51, 0.2);
+    border-color: #009933;
+}
+
+#battery.charging {
+    color: #b8860b;
+}
+
+#battery.warning:not(.charging) {
+    color: #b8860b;
+}
+
+#battery.critical:not(.charging) {
+    color: #cc0033;
+    border-color: #cc0033;
+    background: rgba(204, 0, 51, 0.2);
+}
+
+#custom-power {
+    background: #cc0033;
+    border: none;
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin: 4px 0 4px 4px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+#custom-power:hover {
+    background: #6633cc;
+}
+
+tooltip {
+    background: rgba(51, 51, 51, 0.95);
+    border: 2px solid #cc0033;
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: #ffffff;
+    padding: 6px;
+}

@@ -215,6 +215,8 @@ CORE_PACKAGES_ARCH=(
     "xdg-user-dirs"
     "wget"
     "curl"
+    "gnome-keyring"
+    "seahorse"
     
     # Fonts
     "ttf-jetbrains-mono-nerd"

@@ -1,16 +1,16 @@
+/* Wofi Configuration */
 width=600
 height=400
-location=center
-show=drun
+location=bottom
+orientation=vertical
+halign=center
 prompt=Search...
 filter_rate=100
 allow_markup=true
 no_actions=true
-halign=fill
-orientation=vertical
-content_halign=fill
+hide_scroll=true
+matching=fuzzy
 insensitive=true
-allow_images=true
 image_size=32
-gtk_dark=true
-dynamic_lines=true
+columns=1
+allow_images=true

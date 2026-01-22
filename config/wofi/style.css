@@ -1,79 +1,65 @@
-/* ╔════════════════════════════════════════════════════════════════════════╗
-   ║ WOFI STYLES - Glassmorphism                                            ║
-   ╚════════════════════════════════════════════════════════════════════════╝ */
-
-* {
-    font-family: "JetBrainsMono Nerd Font", sans-serif;
-    font-size: 14px;
-}
+/* Wofi Styles - Bottom Floating with Rounded Borders */
 
 window {
-    margin: 0px;
-    border: 2px solid rgba(252, 97, 141, 0.4);
-    background-color: rgba(54, 53, 55, 0.9);
-    border-radius: 16px;
-}
-
-#input {
-    margin: 12px;
-    padding: 12px 16px;
-    border: none;
-    border-radius: 12px;
-    background-color: rgba(105, 103, 108, 0.6);
-    color: #f7f1ff;
-    outline: none;
-}
-
-#input:focus {
-    border: 2px solid #fc618d;
-    background-color: rgba(105, 103, 108, 0.8);
-}
-
-#inner-box {
-    margin: 0px 12px 12px 12px;
-    border: none;
-    border-radius: 12px;
-    background-color: transparent;
+    background: transparent;
+    margin-bottom: 20px;
 }
 
 #outer-box {
-    margin: 0px;
-    border: none;
-    border-radius: 16px;
-    background-color: transparent;
+    background: rgba(54, 53, 55, 0.95);
+    border: 2px solid rgba(252, 97, 141, 0.6);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#input {
+    background: rgba(105, 103, 108, 0.4);
+    border: 2px solid rgba(148, 138, 227, 0.4);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    color: #f7f1ff;
+    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+}
+
+#input:focus {
+    border-color: #fc618d;
+}
+
+#inner-box {
+    background: transparent;
+    border-radius: 12px;
 }
 
 #scroll {
-    margin: 0px;
-    border: none;
+    background: transparent;
+    margin: 0;
 }
 
 #text {
-    margin: 0px 8px;
     color: #f7f1ff;
+    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
 }
 
 #entry {
-    padding: 12px;
-    margin: 4px 0px;
+    padding: 10px 14px;
+    margin: 4px 0;
     border-radius: 10px;
-    background-color: transparent;
+    background: transparent;
 }
 
 #entry:selected {
-    background: linear-gradient(135deg, rgba(252, 97, 141, 0.6), rgba(148, 138, 227, 0.6));
-    border-radius: 10px;
+    background: rgba(252, 97, 141, 0.3);
+    border: 1px solid #fc618d;
 }
 
 #entry:hover {
-    background-color: rgba(105, 103, 108, 0.4);
+    background: rgba(148, 138, 227, 0.2);
 }
 
 #img {
-    margin-right: 8px;
-}
-
-#text:selected {
-    color: #f7f1ff;
-    font-weight: bold;
+    margin-right: 12px;
 }

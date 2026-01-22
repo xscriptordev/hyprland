@@ -1,54 +1,83 @@
 #!/bin/bash
 # ╔═══════════════════════════════════════════════════════════════════════════╗
-# ║ Wallpaper Script                                                          ║
+# ║ Wallpaper Picker with Image Preview                                       ║
 # ╚═══════════════════════════════════════════════════════════════════════════╝
 
 WALLPAPER_DIR="$HOME/.config/hypr/wallpapers"
-DEFAULT_WALLPAPER="$WALLPAPER_DIR/default.jpg"
+CACHE_DIR="$HOME/.cache/wallpaper-picker"
 
-set_wallpaper() {
-    local file="$1"
-    swww img "$file" \
-        --transition-type grow \
-        --transition-pos center \
-        --transition-fps 60 \
-        --transition-duration 2
+# Create cache directory
+mkdir -p "$CACHE_DIR"
+
+# Fallback directories
+if [ ! -d "$WALLPAPER_DIR" ] || [ -z "$(ls -A "$WALLPAPER_DIR" 2>/dev/null)" ]; then
+    WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+fi
+
+if [ ! -d "$WALLPAPER_DIR" ]; then
+    notify-send "Wallpaper Picker" "No wallpaper directory found!" -u critical
+    exit 1
+fi
+
+# Generate thumbnails and list
+generate_list() {
+    for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp} 2>/dev/null; do
+        [ -f "$img" ] || continue
+        
+        filename=$(basename "$img")
+        thumb="$CACHE_DIR/${filename}.thumb.png"
+        
+        # Generate thumbnail if not exists
+        if [ ! -f "$thumb" ]; then
+            convert "$img" -resize 100x60^ -gravity center -extent 100x60 "$thumb" 2>/dev/null
+        fi
+        
+        # Output: img:thumbnail	display_name
+        if [ -f "$thumb" ]; then
+            echo "img:$thumb	$filename"
+        else
+            echo "$filename"
+        fi
+    done
 }
 
-case "$1" in
-    set)
-        if [ -n "$2" ] && [ -f "$2" ]; then
-            set_wallpaper "$2"
-        else
-            echo "Usage: $0 set <path_to_image>"
-            exit 1
-        fi
-        ;;
-    random)
-        if [ -d "$WALLPAPER_DIR" ]; then
-            random_file=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n 1)
-            if [ -n "$random_file" ]; then
-                set_wallpaper "$random_file"
-                notify-send "Wallpaper" "Changed to: $(basename "$random_file")" -i preferences-desktop-wallpaper
-            fi
-        else
-            echo "Wallpaper directory not found: $WALLPAPER_DIR"
-            exit 1
-        fi
-        ;;
-    select)
-        selected=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.webp" \) -printf "%f\n" | wofi --dmenu --prompt "Select Wallpaper" --cache-file /dev/null)
-        if [ -n "$selected" ]; then
-            set_wallpaper "$WALLPAPER_DIR/$selected"
-            notify-send "Wallpaper" "Changed to: $selected" -i preferences-desktop-wallpaper
-        fi
-        ;;
-    *)
-        # Default: open selector
-        selected=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.webp" \) -printf "%f\n" 2>/dev/null | wofi --dmenu --prompt "Select Wallpaper" --cache-file /dev/null)
-        if [ -n "$selected" ]; then
-            set_wallpaper "$WALLPAPER_DIR/$selected"
-            notify-send "Wallpaper" "Changed to: $selected" -i preferences-desktop-wallpaper
-        fi
-        ;;
-esac
+# Main
+wallpapers=$(generate_list)
+
+if [ -z "$wallpapers" ]; then
+    notify-send "Wallpaper Picker" "No wallpapers found!" -u critical
+    exit 1
+fi
+
+# Use wofi with images
+selected=$(echo "$wallpapers" | wofi --dmenu --prompt "Select Wallpaper" --cache-file /dev/null --allow-images)
+
+if [ -z "$selected" ]; then
+    exit 0
+fi
+
+# Extract filename (after tab)
+filename=$(echo "$selected" | awk -F'\t' '{print $2}')
+if [ -z "$filename" ]; then
+    filename="$selected"
+fi
+
+wallpaper_path="$WALLPAPER_DIR/$filename"
+
+if [ ! -f "$wallpaper_path" ]; then
+    notify-send "Wallpaper Picker" "File not found: $filename" -u critical
+    exit 1
+fi
+
+# Apply wallpaper with swww
+if command -v swww &> /dev/null; then
+    swww img "$wallpaper_path" \
+        --transition-type grow \
+        --transition-pos center \
+        --transition-duration 1 \
+        --transition-fps 60
+    
+    notify-send "Wallpaper" "Applied: $filename" -i preferences-desktop-wallpaper
+else
+    notify-send "Wallpaper Picker" "swww not installed!" -u critical
+fi
