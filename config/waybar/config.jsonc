@@ -16,6 +16,7 @@
     ],
     "modules-right": [
         "tray",
+        "custom/theme",
         "cpu",
         "memory",
         "pulseaudio",
@@ -46,6 +47,13 @@
             "weeks-pos": "right",
             "on-scroll": 1
         }
+    },
+    "custom/theme": {
+        "format": " {}",
+        "exec": "cat ~/.config/hypr/theme.conf 2>/dev/null | grep 'Theme:' | cut -d':' -f2 | tr -d ' ' || echo 'X'",
+        "interval": 5,
+        "tooltip": false,
+        "on-click": "~/.config/hypr/scripts/theme-switcher.sh"
     },
     "cpu": {
         "format": " {usage}%",
@@ -87,7 +95,7 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon} {capacity}%",
+        "format": " {capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-icons": [

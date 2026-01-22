@@ -1,32 +1,37 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
 ## [Unreleased]
 
-### Completed - Kitty Theme Integration
-- [x] Copy Kitty themes to config/kitty/themes/ (13 themes)
-- [x] Copy Kitty base config with include directive
-- [x] Update theme-switcher.sh to also switch Kitty themes
-- [x] Update install.sh to install Kitty config locally
-- [x] Clean up cloned repo
+### Completed Tasks
+- [x] Update Waybar icons to user-specified icons (, , , , )
+- [x] Add theme name island to Waybar (shows current theme, clickable)
+- [x] Fix wallpaper selector (simplified, checks swww-daemon)
 
-### All Tasks Complete
+### All Previous Completed
 - [x] Unified theme switching: Hyprland + Waybar + Kitty
-- [x] Wallpaper picker with thumbnails
-- [x] Wofi background black, centered
-- [x] Waybar pill-shaped islands (20px radius)
-- [x] All dark theme backgrounds now black
-- [x] gnome-keyring for WiFi passwords
+- [x] KDE kwallet support for WiFi passwords
+- [x] Verified install.sh installs all components
+- [x] Wofi black background
+- [x] Waybar pill-shaped islands
+
+---
+
+## [1.0.3] - 2026-01-22
+
+### Added
+- Theme name island in Waybar (clickable to switch themes)
+- New Waybar icons: CPU, Memory, Clock, Battery, Network
+
+### Fixed
+- Wallpaper selector reliability
 
 ---
 
 ## [1.0.2] - 2026-01-22
 
 ### Added
-- Kitty theme integration (13 themes)
-- Unified theme switcher for Hyprland + Waybar + Kitty
-- Local Kitty config in config/kitty/
+- Kitty theme integration
+- KDE kwallet support for WiFi passwords
 
 ---
 
@@ -35,7 +40,6 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Waybar islands pill-shaped
 - All dark theme backgrounds now black
-- Wallpaper picker with thumbnail grid
 
 ---
 
