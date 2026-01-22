@@ -19,6 +19,9 @@
 - [x] Update installer for any new dependencies
 - [x] Evaluate and apply 120fps animations where possible
 - [x] Reduce Waybar font size slightly and add scale menu (75%/80%)
+- [x] Fix wallpaper picker thumbnails layout (style cards)
+- [x] Fix rofi launcher theming ( readable text)
+- [x] Improve logout menu layout and icons (wlogout)
 
 ### Completed
 - [x] Update Waybar icons to user-specified icons

@@ -11,6 +11,8 @@ WAYBAR_CURRENT="$HOME/.config/waybar/current-theme.css"
 KITTY_THEMES="$HOME/.config/kitty/themes"
 KITTY_CONF="$HOME/.config/kitty/kitty.conf"
 KITTY_CURRENT="$HOME/.config/kitty/current-theme.conf"
+ROFI_DIR="$HOME/.config/rofi"
+ROFI_COLORS="$ROFI_DIR/colors.rasi"
 
 # Fallback paths
 SCRIPT_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
@@ -53,6 +55,37 @@ main() {
         notify-send "Theme Switcher" "Theme not found: $selected" -u critical
         exit 1
     fi
+
+    mkdir -p "$ROFI_DIR"
+
+    get_hex() {
+        local key="$1"
+        awk -v key="$key" '
+            $1 == key {
+                if (match($0, /rgb\(([0-9a-fA-F]{6})\)/, m)) {
+                    print m[1]
+                    exit
+                }
+            }
+        ' "$theme_file"
+    }
+
+    accent_hex=$(get_hex '$color1')
+    accent2_hex=$(get_hex '$color5')
+    fg_hex=$(get_hex '$color7')
+
+    accent_hex=${accent_hex:-fc618d}
+    accent2_hex=${accent2_hex:-948ae3}
+    fg_hex=${fg_hex:-f7f1ff}
+
+    cat > "$ROFI_COLORS" <<EOF
+* {
+    background: #000000f2;
+    foreground: #${fg_hex};
+    accent: #${accent_hex};
+    accent2: #${accent2_hex};
+}
+EOF
     
     # ┌─────────────────────────────────────────────────────────────────────────┐
     # │ Apply Hyprland theme                                                    │

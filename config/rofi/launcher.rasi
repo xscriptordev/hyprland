@@ -1,13 +1,10 @@
+@import "colors.rasi"
+
 configuration {
     show-icons: true;
     font: "JetBrainsMono Nerd Font 11";
-}
-
-* {
-    background: #000000f2;
-    foreground: #f7f1ff;
-    accent: #fc618d;
-    accent2: #948ae3;
+    display-drun: "";
+    display-run: "";
 }
 
 window {
@@ -33,6 +30,9 @@ inputbar {
     text-color: @foreground;
 }
 
+prompt { enabled: false; }
+textbox-prompt-colon { enabled: false; }
+
 listview {
     lines: 10;
     spacing: 8px;
@@ -47,8 +47,10 @@ element {
 }
 
 element selected {
-    background-color: @accent;
-    text-color: #000000;
+    background-color: rgba(252, 97, 141, 0.22);
+    border: 2px;
+    border-color: @accent;
+    text-color: @foreground;
 }
 
 element-icon {
@@ -58,4 +60,3 @@ element-icon {
 element-text {
     background-color: transparent;
 }
-
