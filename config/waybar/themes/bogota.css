@@ -171,7 +171,10 @@
     font-size: 14px;
 }
 
-#custom-power:hover {
+
+    background: #fc618d;
+    color: #f7f1ff;
+}
 
 #custom-theme {
     background: rgba(0, 0, 0, 0.92);
@@ -186,8 +189,9 @@
     background: rgba(148, 138, 227, 0.2);
     border-color: #948ae3;
 }
-    background: #fc618d;
-    color: #f7f1ff;
+
+#custom-power:hover {
+    background: #948ae3;
 }
 
 tooltip {

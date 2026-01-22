@@ -66,6 +66,20 @@
     margin: 4px;
 }
 
+#custom-theme {
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid rgba(148, 138, 227, 0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin: 4px;
+    color: #948ae3;
+}
+
+#custom-theme:hover {
+    background: rgba(148, 138, 227, 0.2);
+    border-color: #948ae3;
+}
+
 #cpu {
     background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(90, 212, 230, 0.4);
@@ -171,25 +185,11 @@
 }
 
 #custom-power:hover {
-
-#custom-theme {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(148, 138, 227, 0.4);
-    border-radius: 20px;
-    padding: 4px 14px;
-    margin: 4px;
-    color: #948ae3;
-}
-
-#custom-theme:hover {
-    background: rgba(148, 138, 227, 0.2);
-    border-color: #948ae3;
-}
     background: #948ae3;
 }
 
 tooltip {
-    background: rgba(54, 53, 55, 0.95);
+    background: rgba(0, 0, 0, 0.95);
     border: 2px solid #fc618d;
     border-radius: 14px;
 }

@@ -170,7 +170,9 @@
     font-size: 14px;
 }
 
-#custom-power:hover {
+
+    background: #948ae3;
+}
 
 #custom-theme {
     background: rgba(0, 0, 0, 0.92);
@@ -185,6 +187,8 @@
     background: rgba(148, 138, 227, 0.2);
     border-color: #948ae3;
 }
+
+#custom-power:hover {
     background: #948ae3;
 }
 
