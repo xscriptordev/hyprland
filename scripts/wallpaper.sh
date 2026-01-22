@@ -82,16 +82,34 @@ pick_with_rofi() {
     [ "$columns" -lt 3 ] && columns=3
     [ "$columns" -gt 7 ] && columns=7
 
-    wallpaper=$(cat "$tmp" | rofi -dmenu \
-        -format '{info}' \
+    selected=$(cat "$tmp" | rofi -dmenu \
         -show-icons \
         -theme "$HOME/.config/rofi/selector.rasi" \
         -theme-str "listview { columns: ${columns}; }")
 
     rm -f "$tmp"
 
-    [ -z "$wallpaper" ] && exit 0
-    printf '%s' "$wallpaper"
+    [ -z "$selected" ] && exit 0
+
+    selected=$(basename "$selected")
+    wallpaper="$WALLPAPER_DIR/$selected"
+
+    if [ -f "$wallpaper" ]; then
+        printf '%s' "$wallpaper"
+        return 0
+    fi
+
+    name="${selected%.*}"
+    for img in "$WALLPAPER_DIR"/*; do
+        [ -f "$img" ] || continue
+        imgname=$(basename "${img%.*}")
+        if [ "$imgname" = "$name" ]; then
+            printf '%s' "$img"
+            return 0
+        fi
+    done
+
+    return 1
 }
 
 pick_with_wofi() {
