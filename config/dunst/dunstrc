@@ -48,7 +48,7 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    background = "#363537E6"
+    background = "#000000F2"
     foreground = "#f7f1ff"
     frame_color = "#948ae3"
     highlight = "#948ae3"
@@ -56,7 +56,7 @@
     default_icon = dialog-information
 
 [urgency_normal]
-    background = "#363537E6"
+    background = "#000000F2"
     foreground = "#f7f1ff"
     frame_color = "#fc618d"
     highlight = "#fc618d"
@@ -64,7 +64,7 @@
     default_icon = dialog-information
 
 [urgency_critical]
-    background = "#1A1A1AE6"
+    background = "#000000F2"
     foreground = "#f7f1ff"
     frame_color = "#FF5555"
     highlight = "#FF5555"

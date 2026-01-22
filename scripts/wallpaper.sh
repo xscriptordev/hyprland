@@ -111,11 +111,21 @@ if ! pgrep -x "swww-daemon" > /dev/null; then
     sleep 0.5
 fi
 
-# Apply wallpaper
+# Randomize transition
+# Possible types: simple, fade, left, right, top, bottom, wipe, wave, grow, center, any, outer
+types=("fade" "left" "right" "top" "bottom" "wipe" "wave" "grow" "center" "outer")
+# Possible positions: center, top, left, right, bottom, top-left, top-right, bottom-left, bottom-right
+positions=("center" "top" "left" "right" "bottom" "top-left" "top-right" "bottom-left" "bottom-right")
+
+# Get random index
+rand_type=${types[$RANDOM % ${#types[@]}]}
+rand_pos=${positions[$RANDOM % ${#positions[@]}]}
+
+# Apply wallpaper with random transition
 swww img "$wallpaper" \
-    --transition-type grow \
-    --transition-pos center \
-    --transition-duration 1 \
+    --transition-type "$rand_type" \
+    --transition-pos "$rand_pos" \
+    --transition-duration 2 \
     --transition-fps 60
 
 notify-send "Wallpaper" "Applied: $(basename "$wallpaper")" -i preferences-desktop-wallpaper

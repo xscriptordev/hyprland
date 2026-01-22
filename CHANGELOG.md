@@ -3,6 +3,9 @@
 ## [Unreleased]
 
 ### Pending Tasks
+- [x] Change notification background (Dunst) to black
+- [x] Set wallpaper selector search bar background to black
+- [x] Implement randomized wallpaper transition animations
 - [x] Implement wallpaper selector with thumbnails (Super+W)
 - [x] Update Waybar icons and add new modules (hostname, gpu, memory, etc.)
 - [x] Implement theme name island in Waybar
