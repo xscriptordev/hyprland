@@ -186,6 +186,9 @@ CORE_PACKAGES_ARCH=(
     "waybar"
     "wofi"
     "rofi"
+    "jq"
+    "imagemagick"
+    "librsvg"
     
     # Terminal
     "kitty"
@@ -549,7 +552,7 @@ main() {
         fedora)
             warn "Fedora support is experimental. Some packages may not be available."
             # Basic packages for Fedora
-            install_packages_fedora hyprland waybar wofi rofi kitty dunst wlogout grim slurp wl-clipboard
+            install_packages_fedora hyprland waybar wofi rofi kitty dunst wlogout grim slurp wl-clipboard jq imagemagick librsvg2
             ;;
         debian|ubuntu|pop)
             error "Debian/Ubuntu requires manual Hyprland installation from source."

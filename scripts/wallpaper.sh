@@ -55,9 +55,9 @@ pick_with_rofi() {
         thumb_sqre="$CACHE_DIR/${filename}.sqre.png"
         ensure_thumb "$img" "$thumb_sqre" "$THUMB_SQRE_SIZE" || true
         if [ -f "$thumb_sqre" ]; then
-            printf '%s:::%s\0icon\x1f%s\n' "$filename" "$img" "$thumb_sqre" >> "$tmp"
+            printf '%s\0icon\x1f%s\0info\x1f%s\n' "$filename" "$thumb_sqre" "$img" >> "$tmp"
         else
-            printf '%s:::%s\n' "$filename" "$img" >> "$tmp"
+            printf '%s\0info\x1f%s\n' "$filename" "$img" >> "$tmp"
         fi
         count=$((count + 1))
     done
@@ -83,10 +83,7 @@ pick_with_rofi() {
     [ "$columns" -gt 7 ] && columns=7
 
     wallpaper=$(cat "$tmp" | rofi -dmenu \
-        -p "" \
-        -display-column-separator ":::" \
-        -display-columns 1 \
-        -format '{2}' \
+        -format '{info}' \
         -show-icons \
         -theme "$HOME/.config/rofi/selector.rasi" \
         -theme-str "listview { columns: ${columns}; }")
@@ -192,4 +189,3 @@ swww img "$wallpaper" \
     --transition-fps 120
 
 notify-send "Wallpaper" "Applied: $(basename "$wallpaper")" -i preferences-desktop-wallpaper
-

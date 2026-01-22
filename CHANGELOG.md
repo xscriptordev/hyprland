@@ -22,6 +22,10 @@
 - [x] Fix wallpaper picker thumbnails layout (style cards)
 - [x] Fix rofi launcher theming ( readable text)
 - [x] Improve logout menu layout and icons (wlogout)
+- [x] Improve wallpaper cards (single background + no search bar) and fix selection
+- [x] Make rofi drun icons rounded and ensure white text on black
+- [x] Fix logout icons rendering (remove red background issue)
+- [x] Add required deps for rofi/wlogout thumbnails (jq, imagemagick, librsvg)
 
 ### Completed
 - [x] Update Waybar icons to user-specified icons
