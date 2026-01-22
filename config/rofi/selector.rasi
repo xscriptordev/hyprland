@@ -65,4 +65,5 @@ element-text {
     padding: 0.9em 0 0 0;
     horizontal-align: 0.5;
     background-color: transparent;
+    text-color: #fce566;
 }
