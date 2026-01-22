@@ -1,7 +1,6 @@
-/* Wofi Configuration */
 width=600
 height=400
-location=bottom
+location=center
 orientation=vertical
 halign=center
 prompt=Search...
@@ -11,6 +10,4 @@ no_actions=true
 hide_scroll=true
 matching=fuzzy
 insensitive=true
-image_size=32
 columns=1
-allow_images=true

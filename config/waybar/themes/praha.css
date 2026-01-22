@@ -2,7 +2,7 @@
 #custom-logo {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(255, 85, 85, 0.6);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 14px;
     margin: 4px 4px 4px 0;
     color: #FF5555;
@@ -13,7 +13,7 @@
 #workspaces {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(189, 147, 249, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     margin: 4px;
     padding: 0 4px;
 }
@@ -24,7 +24,7 @@
     color: #6272A4;
     background: transparent;
     border: none;
-    border-radius: 8px;
+    border-radius: 16px;
 }
 
 #workspaces button:hover {
@@ -46,7 +46,7 @@
 #clock {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(189, 147, 249, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 18px;
     margin: 4px;
     color: #FFFFFF;
@@ -61,7 +61,7 @@
 #tray {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(98, 114, 164, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 10px;
     margin: 4px;
 }
@@ -69,7 +69,7 @@
 #cpu {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(139, 233, 253, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 12px;
     margin: 4px;
     color: #8BE9FD;
@@ -83,7 +83,7 @@
 #memory {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(189, 147, 249, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 12px;
     margin: 4px;
     color: #BD93F9;
@@ -97,7 +97,7 @@
 #pulseaudio {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(184, 230, 160, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 12px;
     margin: 4px;
     color: #B8E6A0;
@@ -116,7 +116,7 @@
 #network {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(139, 233, 253, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 12px;
     margin: 4px;
     color: #8BE9FD;
@@ -135,7 +135,7 @@
 #battery {
     background: rgba(26, 26, 26, 0.92);
     border: 2px solid rgba(184, 230, 160, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 12px;
     margin: 4px;
     color: #B8E6A0;
@@ -163,7 +163,7 @@
 #custom-power {
     background: #FF5555;
     border: none;
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 4px 14px;
     margin: 4px 0 4px 4px;
     color: #FFFFFF;
@@ -177,7 +177,7 @@
 tooltip {
     background: rgba(26, 26, 26, 0.95);
     border: 2px solid #BD93F9;
-    border-radius: 10px;
+    border-radius: 14px;
 }
 
 tooltip label {

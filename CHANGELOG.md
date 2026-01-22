@@ -4,41 +4,34 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Pending
-- [ ] Test on different Hyprland versions
+### Pending Fixes
+- [x] Fix wallpaper selector (SUPER+W not working)
+- [x] Fix wallpaper script (simplified without thumbnails)
+- [x] Revert Wofi to center position
+- [x] Make Waybar islands more rounded (pill-shaped, 20px radius)
 
 ### Completed
 - [x] Make Waybar colors dynamic based on selected theme
 - [x] Initial configuration created
 - [x] 13 color themes implemented
 - [x] Install script with NVIDIA support
-- [x] Fixed `animations:first_launch_animation` error
+- [x] Fixed animations.conf errors
 - [x] Fixed deprecated layerrule syntax
 - [x] Extended keybindings (40+ shortcuts)
-- [x] Fixed `decoration:drop_shadow` - now uses `shadow {}` subcategory
-- [x] Fixed `decoration:shadow_range` - now `shadow { range = }` 
-- [x] Fixed `decoration:shadow_render_power` - now `shadow { render_power = }`
-- [x] Fixed `decoration:col.shadow` - now `shadow { color = }`
-- [x] Fixed `decoration:shadow_offset` - now `shadow { offset = }`
-- [x] Fixed `master:new_is_master` - removed (deprecated)
-- [x] Fixed `gestures:workspace_swipe` - replaced with new `gesture =` syntax
-- [x] Updated Waybar to island-style separated modules
-- [x] Each Waybar module now has rounded borders and individual styling
+- [x] Fixed shadow subcategory syntax
+- [x] Fixed gestures syntax
+- [x] Created 13 pre-built Waybar CSS themes
+- [x] Added gnome-keyring for WiFi passwords
 
 ---
 
-## [1.0.1] - 2026-01-21
+## [1.0.1] - 2026-01-22
 
 ### Fixed
-- Hyprland config compatibility with latest version
-- Shadow configuration now uses subcategory syntax
-- Gestures use new `gesture = 3, horizontal, workspace` syntax
-- Removed deprecated master layout options
-
-### Changed
-- Waybar redesigned with island-style modules
-- Each module is a separate rounded container
-- Improved visual hierarchy with colored borders
+- Wallpaper selector simplified (more reliable)
+- Wofi reverted to center position
+- Waybar islands now pill-shaped (20px border-radius)
+- All 13 theme CSS files updated
 
 ---
 
@@ -46,11 +39,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Initial release
-- 13 color schemes (X, Madrid, Lahabana, Seul, Miami, Paris, Tokio, Oslo, Helsinki, Berlin, London, Praha, Bogota)
+- 13 color schemes
 - Modular Hyprland configuration
-- Waybar with glassmorphism design
-- Wofi app launcher
-- Dunst notifications
-- Hyprlock and Hypridle
+- Waybar, Wofi, Dunst configs
 - Install script with NVIDIA auto-detection
-- Complete documentation

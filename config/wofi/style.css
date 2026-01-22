@@ -1,8 +1,7 @@
-/* Wofi Styles - Bottom Floating with Rounded Borders */
+/* Wofi Styles - Centered with Rounded Borders */
 
 window {
     background: transparent;
-    margin-bottom: 20px;
 }
 
 #outer-box {
@@ -58,8 +57,4 @@ window {
 
 #entry:hover {
     background: rgba(148, 138, 227, 0.2);
-}
-
-#img {
-    margin-right: 12px;
 }

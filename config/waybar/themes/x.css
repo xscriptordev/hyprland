@@ -1,9 +1,9 @@
-/* Theme: X */
+/* Theme: X - Pill-Shaped Islands */
 #custom-logo {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(252, 97, 141, 0.6);
-    border-radius: 12px;
-    padding: 4px 14px;
+    border-radius: 20px;
+    padding: 4px 16px;
     margin: 4px 4px 4px 0;
     color: #fc618d;
     font-size: 14px;
@@ -11,20 +11,20 @@
 }
 
 #workspaces {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(148, 138, 227, 0.4);
-    border-radius: 12px;
+    border-radius: 20px;
     margin: 4px;
-    padding: 0 4px;
+    padding: 0 6px;
 }
 
 #workspaces button {
-    padding: 4px 10px;
+    padding: 4px 12px;
     margin: 4px 2px;
     color: #69676c;
     background: transparent;
     border: none;
-    border-radius: 8px;
+    border-radius: 16px;
 }
 
 #workspaces button:hover {
@@ -44,10 +44,10 @@
 }
 
 #clock {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(252, 97, 141, 0.4);
-    border-radius: 12px;
-    padding: 4px 18px;
+    border-radius: 20px;
+    padding: 4px 20px;
     margin: 4px;
     color: #f7f1ff;
     font-weight: 600;
@@ -59,18 +59,18 @@
 }
 
 #tray {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(105, 103, 108, 0.4);
-    border-radius: 12px;
-    padding: 4px 10px;
+    border-radius: 20px;
+    padding: 4px 12px;
     margin: 4px;
 }
 
 #cpu {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(90, 212, 230, 0.4);
-    border-radius: 12px;
-    padding: 4px 12px;
+    border-radius: 20px;
+    padding: 4px 14px;
     margin: 4px;
     color: #5ad4e6;
 }
@@ -81,10 +81,10 @@
 }
 
 #memory {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(148, 138, 227, 0.4);
-    border-radius: 12px;
-    padding: 4px 12px;
+    border-radius: 20px;
+    padding: 4px 14px;
     margin: 4px;
     color: #948ae3;
 }
@@ -95,10 +95,10 @@
 }
 
 #pulseaudio {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(123, 216, 143, 0.4);
-    border-radius: 12px;
-    padding: 4px 12px;
+    border-radius: 20px;
+    padding: 4px 14px;
     margin: 4px;
     color: #7bd88f;
 }
@@ -114,10 +114,10 @@
 }
 
 #network {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(90, 212, 230, 0.4);
-    border-radius: 12px;
-    padding: 4px 12px;
+    border-radius: 20px;
+    padding: 4px 14px;
     margin: 4px;
     color: #5ad4e6;
 }
@@ -133,10 +133,10 @@
 }
 
 #battery {
-    background: rgba(54, 53, 55, 0.92);
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(123, 216, 143, 0.4);
-    border-radius: 12px;
-    padding: 4px 12px;
+    border-radius: 20px;
+    padding: 4px 14px;
     margin: 4px;
     color: #7bd88f;
 }
@@ -163,8 +163,8 @@
 #custom-power {
     background: #fc618d;
     border: none;
-    border-radius: 12px;
-    padding: 4px 14px;
+    border-radius: 20px;
+    padding: 4px 16px;
     margin: 4px 0 4px 4px;
     color: #f7f1ff;
     font-size: 14px;
@@ -177,7 +177,7 @@
 tooltip {
     background: rgba(54, 53, 55, 0.95);
     border: 2px solid #fc618d;
-    border-radius: 10px;
+    border-radius: 14px;
 }
 
 tooltip label {
