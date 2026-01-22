@@ -4,6 +4,7 @@
 WALLPAPER_DIR="$HOME/.config/hypr/wallpapers"
 CACHE_DIR="$HOME/.cache/wallpaper-thumbs"
 THUMB_SIZE="150x100"
+THUMB_SQRE_SIZE="256x256"
 
 # Create cache dir
 mkdir -p "$CACHE_DIR"
@@ -22,7 +23,11 @@ if [ ! -d "$WALLPAPER_DIR" ]; then
     exit 1
 fi
 
-# Generate entries with thumbnails
+use_rofi=0
+if command -v rofi >/dev/null 2>&1; then
+    use_rofi=1
+fi
+
 entries=""
 shopt -s nullglob nocaseglob
 for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp}; do
@@ -31,21 +36,34 @@ for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp}; do
     filename=$(basename "$img")
     name="${filename%.*}"
     thumb="$CACHE_DIR/${filename}.png"
+    thumb_sqre="$CACHE_DIR/${filename}.sqre.png"
     
-    # Generate thumbnail if missing or outdated
-    if [ ! -f "$thumb" ] || [ "$img" -nt "$thumb" ]; then
-        if command -v magick &> /dev/null; then
-            magick "$img" -resize "$THUMB_SIZE^" -gravity center -extent "$THUMB_SIZE" "$thumb" 2>/dev/null
-        elif command -v convert &> /dev/null; then
-            convert "$img" -resize "$THUMB_SIZE^" -gravity center -extent "$THUMB_SIZE" "$thumb" 2>/dev/null
+    if [ "$use_rofi" -eq 1 ]; then
+        if [ ! -f "$thumb_sqre" ] || [ "$img" -nt "$thumb_sqre" ]; then
+            if command -v magick &> /dev/null; then
+                magick "$img" -resize "$THUMB_SQRE_SIZE^" -gravity center -extent "$THUMB_SQRE_SIZE" "$thumb_sqre" 2>/dev/null
+            elif command -v convert &> /dev/null; then
+                convert "$img" -resize "$THUMB_SQRE_SIZE^" -gravity center -extent "$THUMB_SQRE_SIZE" "$thumb_sqre" 2>/dev/null
+            fi
         fi
-    fi
-    
-    # Format: img:<path>:text:<name>
-    if [ -f "$thumb" ]; then
-        entries+="img:${thumb}:text:${name}\n"
+        if [ -f "$thumb_sqre" ]; then
+            entries+="${filename}:::${img}:::${thumb_sqre}\0icon\x1f${thumb_sqre}\n"
+        else
+            entries+="${filename}:::${img}:::${img}\n"
+        fi
     else
-        entries+="${filename}\n"
+        if [ ! -f "$thumb" ] || [ "$img" -nt "$thumb" ]; then
+            if command -v magick &> /dev/null; then
+                magick "$img" -resize "$THUMB_SIZE^" -gravity center -extent "$THUMB_SIZE" "$thumb" 2>/dev/null
+            elif command -v convert &> /dev/null; then
+                convert "$img" -resize "$THUMB_SIZE^" -gravity center -extent "$THUMB_SIZE" "$thumb" 2>/dev/null
+            fi
+        fi
+        if [ -f "$thumb" ]; then
+            entries+="img:${thumb}:text:${name}\n"
+        else
+            entries+="${filename}\n"
+        fi
     fi
 done
 shopt -u nocaseglob nullglob
@@ -55,49 +73,72 @@ if [ -z "$entries" ]; then
     exit 1
 fi
 
-# Show wofi picker with images
-selected=$(printf "%b" "$entries" | wofi --dmenu \
-    --prompt " Wallpaper" \
-    --cache-file /dev/null \
-    --allow-images \
-    --define image_size=150 \
-    --columns 4 \
-    --width 1000 \
-    --height 600 \
-    --style "$HOME/.config/wofi/wallpaper.css")
+if [ "$use_rofi" -eq 1 ]; then
+    mon_x_res=1920
+    mon_scale=100
+    if command -v hyprctl >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+        mon_x_res=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true) | .width' 2>/dev/null)
+        mon_scale=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true) | .scale' 2>/dev/null | sed 's/\.//')
+        mon_x_res=${mon_x_res:-1920}
+        mon_scale=${mon_scale:-100}
+    fi
+    mon_x_res=$((mon_x_res * 100 / mon_scale))
+    columns=$((mon_x_res / 360))
+    [ "$columns" -lt 3 ] && columns=3
+    [ "$columns" -gt 7 ] && columns=7
+
+    selected=$(printf "%b" "$entries" | rofi -dmenu \
+        -p "Wallpaper" \
+        -display-column-separator ":::" \
+        -display-columns 1 \
+        -show-icons \
+        -theme "$HOME/.config/rofi/selector.rasi" \
+        -theme-str "listview { columns: ${columns}; }")
+else
+    selected=$(printf "%b" "$entries" | wofi --dmenu \
+        --prompt " Wallpaper" \
+        --cache-file /dev/null \
+        --allow-images \
+        --define image_size=150 \
+        --columns 4 \
+        --width 1000 \
+        --height 600 \
+        --style "$HOME/.config/wofi/wallpaper.css")
+fi
 
 if [ -z "$selected" ]; then
     exit 0
 fi
 
-# Extract the name from selection
-if [[ "$selected" == img:*:text:* ]]; then
-    name="${selected#img:}"
-    name="${name#*:text:}"
+if [ "$use_rofi" -eq 1 ]; then
+    wallpaper=$(awk -F ':::' '{print $2}' <<<"$selected")
 else
-    name="$(basename "$selected")"
-    name="${name%.*}"
-fi
-
-# Find the actual file
-wallpaper=""
-for ext in jpg jpeg png webp JPG JPEG PNG WEBP; do
-    if [ -f "$WALLPAPER_DIR/$name.$ext" ]; then
-        wallpaper="$WALLPAPER_DIR/$name.$ext"
-        break
+    if [[ "$selected" == img:*:text:* ]]; then
+        name="${selected#img:}"
+        name="${name#*:text:}"
+    else
+        name="$(basename "$selected")"
+        name="${name%.*}"
     fi
-done
 
-# Fallback: try to match by name
-if [ -z "$wallpaper" ] || [ ! -f "$wallpaper" ]; then
-    for img in "$WALLPAPER_DIR"/*; do
-        [ -f "$img" ] || continue
-        imgname=$(basename "${img%.*}")
-        if [ "$imgname" = "$name" ]; then
-            wallpaper="$img"
+    wallpaper=""
+    for ext in jpg jpeg png webp JPG JPEG PNG WEBP; do
+        if [ -f "$WALLPAPER_DIR/$name.$ext" ]; then
+            wallpaper="$WALLPAPER_DIR/$name.$ext"
             break
         fi
     done
+
+    if [ -z "$wallpaper" ] || [ ! -f "$wallpaper" ]; then
+        for img in "$WALLPAPER_DIR"/*; do
+            [ -f "$img" ] || continue
+            imgname=$(basename "${img%.*}")
+            if [ "$imgname" = "$name" ]; then
+                wallpaper="$img"
+                break
+            fi
+        done
+    fi
 fi
 
 if [ -z "$wallpaper" ] || [ ! -f "$wallpaper" ]; then
@@ -126,6 +167,6 @@ swww img "$wallpaper" \
     --transition-type "$rand_type" \
     --transition-pos "$rand_pos" \
     --transition-duration 2 \
-    --transition-fps 60
+    --transition-fps 120
 
 notify-send "Wallpaper" "Applied: $(basename "$wallpaper")" -i preferences-desktop-wallpaper

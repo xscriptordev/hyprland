@@ -12,6 +12,13 @@
 - [x] Ensure Waybar styling follows "island" design with black backgrounds
 - [x] Verify solutions are up-to-date and optimal
 - [x] Ensure installer includes new Waybar/Wofi scripts and dependencies
+- [x] Reorganize Waybar islands (clock far right; battery before; IP+theme left)
+- [x] Update wallpaper picker behavior (keep Super+W)
+- [x] Update Sofi behavior and dimensions
+- [x] Update logout menu and add a new shortcut
+- [x] Update installer for any new dependencies
+- [x] Evaluate and apply 120fps animations where possible
+- [x] Reduce Waybar font size slightly and add scale menu (75%/80%)
 
 ### Completed
 - [x] Update Waybar icons to user-specified icons

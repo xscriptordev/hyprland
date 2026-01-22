@@ -185,6 +185,7 @@ CORE_PACKAGES_ARCH=(
     # Bar and launcher
     "waybar"
     "wofi"
+    "rofi"
     
     # Terminal
     "kitty"
@@ -356,7 +357,7 @@ backup_config() {
     log "Creating backup of existing configurations..."
     mkdir -p "$BACKUP_DIR"
     
-    local configs=("hypr" "waybar" "wofi" "kitty" "dunst")
+    local configs=("hypr" "waybar" "wofi" "rofi" "wlogout" "kitty" "dunst")
     
     for config in "${configs[@]}"; do
         if [ -d "$CONFIG_DIR/$config" ]; then
@@ -402,6 +403,18 @@ install_dotfiles() {
     # Copy Wofi config
     mkdir -p "$CONFIG_DIR/wofi"
     cp -r "$SCRIPT_DIR/config/wofi/"* "$CONFIG_DIR/wofi/"
+
+    # Copy Rofi config
+    if [ -d "$SCRIPT_DIR/config/rofi" ]; then
+        mkdir -p "$CONFIG_DIR/rofi"
+        cp -r "$SCRIPT_DIR/config/rofi/"* "$CONFIG_DIR/rofi/"
+    fi
+
+    # Copy Wlogout config
+    if [ -d "$SCRIPT_DIR/config/wlogout" ]; then
+        mkdir -p "$CONFIG_DIR/wlogout"
+        cp -r "$SCRIPT_DIR/config/wlogout/"* "$CONFIG_DIR/wlogout/"
+    fi
     
     # Copy Dunst config
     mkdir -p "$CONFIG_DIR/dunst"
@@ -536,7 +549,7 @@ main() {
         fedora)
             warn "Fedora support is experimental. Some packages may not be available."
             # Basic packages for Fedora
-            install_packages_fedora hyprland waybar wofi kitty dunst grim slurp wl-clipboard
+            install_packages_fedora hyprland waybar wofi rofi kitty dunst wlogout grim slurp wl-clipboard
             ;;
         debian|ubuntu|pop)
             error "Debian/Ubuntu requires manual Hyprland installation from source."

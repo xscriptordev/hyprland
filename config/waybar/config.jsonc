@@ -9,16 +9,14 @@
     "exclusive": true,
     "modules-left": [
         "custom/logo",
+        "custom/local_ip",
+        "custom/theme",
         "hyprland/workspaces"
     ],
-    "modules-center": [
-        "clock"
-    ],
+    "modules-center": [],
     "modules-right": [
         "tray",
         "custom/hostname",
-        "custom/local_ip",
-        "custom/theme",
         "custom/palette",
         "cpu",
         "custom/gpu",
@@ -26,7 +24,8 @@
         "pulseaudio",
         "network",
         "battery",
-        "custom/power"
+        "custom/power",
+        "clock"
     ],
     "custom/logo": {
         "format": " X ",

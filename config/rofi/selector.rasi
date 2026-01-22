@@ -1,0 +1,64 @@
+configuration {
+    show-icons: true;
+    font: "JetBrainsMono Nerd Font 11";
+}
+
+* {
+    background: #000000f2;
+    foreground: #f7f1ff;
+    accent: #948ae3;
+    accent2: #fc618d;
+}
+
+window {
+    location: center;
+    width: 90%;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 20px;
+    background-color: @background;
+}
+
+mainbox {
+    padding: 18px;
+    background-color: transparent;
+}
+
+inputbar {
+    padding: 10px;
+    border-radius: 14px;
+    border: 2px;
+    border-color: @accent;
+    background-color: #000000;
+    text-color: @foreground;
+}
+
+listview {
+    columns: 4;
+    spacing: 18px;
+    background-color: transparent;
+}
+
+element {
+    orientation: vertical;
+    padding: 10px;
+    border-radius: 16px;
+    background-color: rgba(20, 20, 20, 0.6);
+    text-color: @foreground;
+}
+
+element selected {
+    border: 2px;
+    border-color: @accent2;
+    background-color: rgba(252, 97, 141, 0.25);
+}
+
+element-icon {
+    size: 96px;
+}
+
+element-text {
+    padding: 6px;
+    horizontal-align: 0.5;
+}
+
