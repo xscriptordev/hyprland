@@ -1,18 +1,14 @@
+@import "colors.rasi"
+
 configuration {
     show-icons: true;
     font: "JetBrainsMono Nerd Font 11";
 }
 
-* {
-    background: #000000f2;
-    foreground: #f7f1ff;
-    accent: #948ae3;
-    accent2: #fc618d;
-}
-
 window {
     location: center;
-    width: 90%;
+    width: 100%;
+    height: 70%;
     border: 2px;
     border-color: @accent;
     border-radius: 20px;
@@ -33,32 +29,36 @@ inputbar {
     text-color: @foreground;
 }
 
+prompt { enabled: false; }
+textbox-prompt-colon { enabled: false; }
+
 listview {
     columns: 4;
-    spacing: 18px;
+    spacing: 2.2em;
     background-color: transparent;
 }
 
 element {
     orientation: vertical;
-    padding: 10px;
-    border-radius: 16px;
-    background-color: rgba(20, 20, 20, 0.6);
+    padding: 1.0em;
+    border-radius: 20px;
+    background-color: rgba(20, 20, 20, 0.55);
     text-color: @foreground;
 }
 
 element selected {
     border: 2px;
     border-color: @accent2;
-    background-color: rgba(252, 97, 141, 0.25);
+    background-color: rgba(148, 138, 227, 0.25);
+    text-color: @foreground;
 }
 
 element-icon {
-    size: 96px;
+    size: 20em;
+    border-radius: 16px;
 }
 
 element-text {
-    padding: 6px;
+    padding: 0.9em 0 0 0;
     horizontal-align: 0.5;
 }
-
