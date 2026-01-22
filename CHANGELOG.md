@@ -3,8 +3,12 @@
 ## [Unreleased]
 
 ### Pending Tasks
-- [ ] Fix Waybar CSS semicolon error (line 175)
-- [ ] Fix Wofi wallpaper thumbnails not showing
+- [x] Implement wallpaper selector with thumbnails (Super+W)
+- [x] Update Waybar icons and add new modules (hostname, gpu, memory, etc.)
+- [x] Implement theme name island in Waybar
+- [x] Ensure Waybar styling follows "island" design with black backgrounds
+- [x] Verify solutions are up-to-date and optimal
+- [x] Ensure installer includes new Waybar/Wofi scripts and dependencies
 
 ### Completed
 - [x] Update Waybar icons to user-specified icons

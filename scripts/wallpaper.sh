@@ -24,7 +24,8 @@ fi
 
 # Generate entries with thumbnails
 entries=""
-for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP} 2>/dev/null; do
+shopt -s nullglob nocaseglob
+for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp}; do
     [ -f "$img" ] || continue
     
     filename=$(basename "$img")
@@ -33,7 +34,9 @@ for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP} 2>/dev/null;
     
     # Generate thumbnail if missing or outdated
     if [ ! -f "$thumb" ] || [ "$img" -nt "$thumb" ]; then
-        if command -v convert &> /dev/null; then
+        if command -v magick &> /dev/null; then
+            magick "$img" -resize "$THUMB_SIZE^" -gravity center -extent "$THUMB_SIZE" "$thumb" 2>/dev/null
+        elif command -v convert &> /dev/null; then
             convert "$img" -resize "$THUMB_SIZE^" -gravity center -extent "$THUMB_SIZE" "$thumb" 2>/dev/null
         fi
     fi
@@ -45,6 +48,7 @@ for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP} 2>/dev/null;
         entries+="${filename}\n"
     fi
 done
+shopt -u nocaseglob nullglob
 
 if [ -z "$entries" ]; then
     notify-send "Wallpaper" "No wallpapers found in $WALLPAPER_DIR" -u critical
@@ -56,17 +60,24 @@ selected=$(printf "%b" "$entries" | wofi --dmenu \
     --prompt " Wallpaper" \
     --cache-file /dev/null \
     --allow-images \
-    --columns 3 \
-    --width 900 \
-    --height 600)
+    --define image_size=150 \
+    --columns 4 \
+    --width 1000 \
+    --height 600 \
+    --style "$HOME/.config/wofi/wallpaper.css")
 
 if [ -z "$selected" ]; then
     exit 0
 fi
 
 # Extract the name from selection
-# Selection format might be "name" or from img format
-name=$(echo "$selected" | sed 's/^img:[^:]*:text://')
+if [[ "$selected" == img:*:text:* ]]; then
+    name="${selected#img:}"
+    name="${name#*:text:}"
+else
+    name="$(basename "$selected")"
+    name="${name%.*}"
+fi
 
 # Find the actual file
 wallpaper=""

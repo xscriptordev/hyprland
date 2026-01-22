@@ -203,6 +203,14 @@ CORE_PACKAGES_ARCH=(
     "pamixer"
     "playerctl"
     "hyprpicker"
+
+    "libnotify"
+    "iproute2"
+    "pciutils"
+    "pavucontrol"
+    "networkmanager"
+    "wofi-emoji"
+    "radeontop"
     
     # System
     "pipewire"
@@ -452,6 +460,26 @@ create_directories() {
     mkdir -p "$HOME/Pictures/Wallpapers"
 }
 
+check_requirements() {
+    local missing=()
+    local cmds=(wofi waybar swww notify-send ip lspci)
+
+    for c in "${cmds[@]}"; do
+        if ! command -v "$c" >/dev/null 2>&1; then
+            missing+=("$c")
+        fi
+    done
+
+    if ! command -v magick >/dev/null 2>&1 && ! command -v convert >/dev/null 2>&1; then
+        missing+=("magick/convert")
+    fi
+
+    if [ "${#missing[@]}" -gt 0 ]; then
+        warn "Some commands are missing: ${missing[*]}"
+        warn "Wallpapers thumbnails require ImageMagick (magick/convert)."
+    fi
+}
+
 # ┌───────────────────────────────────────────────────────────────────────────────────┐
 # │ MAIN INSTALLATION                                                                 │
 # └───────────────────────────────────────────────────────────────────────────────────┘
@@ -533,6 +561,8 @@ main() {
     
     # Create directories
     create_directories
+
+    check_requirements
     
     # Final message
     echo ""
@@ -597,6 +627,7 @@ case "$1" in
         backup_config
         install_dotfiles
         create_directories
+        check_requirements
         log "Dotfiles installed!"
         exit 0
         ;;

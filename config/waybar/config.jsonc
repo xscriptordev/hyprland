@@ -16,8 +16,12 @@
     ],
     "modules-right": [
         "tray",
+        "custom/hostname",
+        "custom/local_ip",
         "custom/theme",
+        "custom/palette",
         "cpu",
+        "custom/gpu",
         "memory",
         "pulseaudio",
         "network",
@@ -38,7 +42,7 @@
         }
     },
     "clock": {
-        "format": " {:%H:%M}",
+        "format": "  {:%H:%M}",
         "format-alt": " {:%A, %d %B %Y}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
@@ -48,20 +52,44 @@
             "on-scroll": 1
         }
     },
+    "custom/hostname": {
+        "format": "  {}",
+        "exec": "~/.config/hypr/scripts/waybar-hostname.sh",
+        "interval": 3600,
+        "tooltip": false
+    },
+    "custom/local_ip": {
+        "format": " 󰩟 {}",
+        "exec": "~/.config/hypr/scripts/waybar-local-ip.sh",
+        "interval": 10,
+        "tooltip": true
+    },
     "custom/theme": {
-        "format": " {}",
-        "exec": "cat ~/.config/hypr/theme.conf 2>/dev/null | grep 'Theme:' | cut -d':' -f2 | tr -d ' ' || echo 'X'",
-        "interval": 5,
+        "format": "  {}",
+        "exec": "~/.config/hypr/scripts/waybar-theme-name.sh",
+        "interval": 2,
         "tooltip": false,
         "on-click": "~/.config/hypr/scripts/theme-switcher.sh"
     },
+    "custom/palette": {
+        "format": "  {}",
+        "exec": "~/.config/hypr/scripts/waybar-palette.sh",
+        "interval": 2,
+        "tooltip": false
+    },
     "cpu": {
-        "format": " {usage}%",
+        "format": "  {usage}%",
+        "interval": 2,
+        "tooltip": true
+    },
+    "custom/gpu": {
+        "format": " 󰍹 {}",
+        "exec": "~/.config/hypr/scripts/waybar-gpu.sh",
         "interval": 2,
         "tooltip": true
     },
     "memory": {
-        "format": " {}%",
+        "format": "  {percentage}%",
         "interval": 2,
         "tooltip": true
     },
@@ -95,9 +123,9 @@
             "warning": 30,
             "critical": 15
         },
-        "format": " {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
+        "format": "  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
         "format-icons": [
             "",
             "",

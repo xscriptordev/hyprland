@@ -66,6 +66,48 @@
     margin: 4px;
 }
 
+#custom-hostname {
+    background: rgba(27, 27, 27, 0.92);
+    border: 2px solid rgba(211, 108, 255, 0.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #D36CFF;
+}
+
+#custom-hostname:hover {
+    background: rgba(211, 108, 255, 0.2);
+    border-color: #D36CFF;
+}
+
+#custom-local_ip {
+    background: rgba(27, 27, 27, 0.92);
+    border: 2px solid rgba(71, 207, 255, 0.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #47CFFF;
+}
+
+#custom-local_ip:hover {
+    background: rgba(71, 207, 255, 0.2);
+    border-color: #47CFFF;
+}
+
+#custom-palette {
+    background: rgba(27, 27, 27, 0.92);
+    border: 2px solid rgba(255, 76, 139, 0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin: 4px;
+    color: #FF4C8B;
+}
+
+#custom-palette:hover {
+    background: rgba(255, 76, 139, 0.2);
+    border-color: #FF4C8B;
+}
+
 #cpu {
     background: rgba(27, 27, 27, 0.92);
     border: 2px solid rgba(71, 207, 255, 0.4);
@@ -78,6 +120,20 @@
 #cpu:hover {
     background: rgba(71, 207, 255, 0.2);
     border-color: #47CFFF;
+}
+
+#custom-gpu {
+    background: rgba(27, 27, 27, 0.92);
+    border: 2px solid rgba(255, 216, 76, 0.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin: 4px;
+    color: #FFD84C;
+}
+
+#custom-gpu:hover {
+    background: rgba(255, 216, 76, 0.2);
+    border-color: #FFD84C;
 }
 
 #memory {
@@ -168,10 +224,6 @@
     margin: 4px 0 4px 4px;
     color: #1b1b1b;
     font-size: 14px;
-}
-
-
-    background: #D36CFF;
 }
 
 #custom-theme {
