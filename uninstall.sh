@@ -8,6 +8,13 @@ CONFIG_DIR="$HOME/.config"
 echo "This will remove the Hyprland configuration files."
 echo "It will NOT uninstall packages or remove NVIDIA configuration."
 echo ""
+echo "The following will be removed:"
+echo "  - ~/.config/hypr"
+echo "  - ~/.config/waybar"
+echo "  - ~/.config/wofi"
+echo "  - ~/.config/dunst"
+echo "  - ~/.config/kitty"
+echo ""
 read -p "Continue? [y/N] " response
 
 if [[ ! "$response" =~ ^[Yy]$ ]]; then
@@ -41,6 +48,13 @@ rm -rf "$CONFIG_DIR/hypr"
 rm -rf "$CONFIG_DIR/waybar"
 rm -rf "$CONFIG_DIR/wofi"
 rm -rf "$CONFIG_DIR/dunst"
+rm -rf "$CONFIG_DIR/kitty"
 
-echo "Configuration removed."
-echo "Note: Kitty config was not removed (managed separately)."
+# Remove wallpaper cache
+rm -rf "$HOME/.cache/wallpaper-thumbs"
+
+echo ""
+echo "Configuration removed successfully!"
+echo ""
+echo "To reinstall, run:"
+echo "  ./install.sh"

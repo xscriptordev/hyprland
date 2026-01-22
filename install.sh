@@ -217,6 +217,8 @@ CORE_PACKAGES_ARCH=(
     "curl"
     "gnome-keyring"
     "seahorse"
+    "kwallet5"
+    "libsecret"
     
     # Fonts
     "ttf-jetbrains-mono-nerd"
@@ -417,10 +419,25 @@ install_dotfiles() {
 # └───────────────────────────────────────────────────────────────────────────────────┘
 
 install_kitty_config() {
-    log "Installing custom Kitty configuration..."
+    log "Installing Kitty configuration..."
     
-    # Run the custom kitty installer from xscriptordev
-    wget -qO- https://raw.githubusercontent.com/xscriptordev/terminal/main/kitty/install.sh | bash
+    # Copy Kitty config from local
+    mkdir -p "$CONFIG_DIR/kitty/themes"
+    
+    if [ -f "$SCRIPT_DIR/config/kitty/kitty.conf" ]; then
+        cp "$SCRIPT_DIR/config/kitty/kitty.conf" "$CONFIG_DIR/kitty/"
+        log "Installed kitty.conf"
+    fi
+    
+    if [ -d "$SCRIPT_DIR/config/kitty/themes" ]; then
+        cp -r "$SCRIPT_DIR/config/kitty/themes/"* "$CONFIG_DIR/kitty/themes/"
+        log "Installed Kitty themes"
+    fi
+    
+    # Set default theme
+    if [ -f "$CONFIG_DIR/kitty/themes/x.conf" ]; then
+        cp "$CONFIG_DIR/kitty/themes/x.conf" "$CONFIG_DIR/kitty/current-theme.conf"
+    fi
     
     log "Kitty configuration installed!"
 }

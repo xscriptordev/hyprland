@@ -11,3 +11,5 @@ hide_scroll=true
 matching=fuzzy
 insensitive=true
 columns=1
+allow_images=true
+image_size=32

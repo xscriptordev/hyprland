@@ -1,21 +1,21 @@
-/* Wofi Styles - Centered with Rounded Borders */
+/* Wofi Styles - Black Background */
 
 window {
     background: transparent;
 }
 
 #outer-box {
-    background: rgba(54, 53, 55, 0.95);
+    background: rgba(0, 0, 0, 1);
     border: 2px solid rgba(252, 97, 141, 0.6);
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
 }
 
 #input {
-    background: rgba(105, 103, 108, 0.4);
+    background: rgba(40, 40, 40, 0.8);
     border: 2px solid rgba(148, 138, 227, 0.4);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 12px 16px;
     margin-bottom: 16px;
     color: #f7f1ff;
@@ -29,7 +29,7 @@ window {
 
 #inner-box {
     background: transparent;
-    border-radius: 12px;
+    border-radius: 14px;
 }
 
 #scroll {
@@ -46,7 +46,7 @@ window {
 #entry {
     padding: 10px 14px;
     margin: 4px 0;
-    border-radius: 10px;
+    border-radius: 12px;
     background: transparent;
 }
 
@@ -57,4 +57,8 @@ window {
 
 #entry:hover {
     background: rgba(148, 138, 227, 0.2);
+}
+
+#img {
+    margin-right: 12px;
 }
